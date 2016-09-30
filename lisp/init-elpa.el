@@ -25,15 +25,14 @@
 (when (< emacs-major-version 24)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
-;;; Also use Melpa for most packages
-(add-to-list 'package-archives `("melpa" . ,(if (< emacs-major-version 24)
-                                                "http://melpa.org/packages/"
-                                              "https://melpa.org/packages/")))
+;; Also use Melpa for most packages
+; (add-to-list 'package-archives `("melpa" . ,(if (< emacs-major-version 24)
+;                                                 "http://melpa.org/packages/"
+;                                               "https://melpa.org/packages/")))
+(add-to-list 'package-archives `("melpa" . "http://melpa.org/packages/"))
 
 ;; NOTE: In case of MELPA problems, the official mirror URL is
 ;; https://www.mirrorservice.org/sites/stable.melpa.org/packages/
-
-
 
 
 ;;; On-demand installation of packages
