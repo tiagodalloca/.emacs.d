@@ -2,171 +2,82 @@
 ;;; This file bootstraps the configuration, which is divided into
 ;;; a number of other files.
 
-(let ((minver "23.3"))
-  (when (version<= emacs-version "23.1")
-    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
-(when (version<= emacs-version "24")
-  (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
 
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(require 'init-benchmarking) ;; Measure startup time
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(require 'package)
+(package-initialize)
 
-(defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
-(defconst *is-a-mac* (eq system-type 'darwin))
+(defun load-directory (dir)
+  (let ((load-it
+          (lambda (f)
+            (load-file (concat (file-name-as-directory dir) f)))))
+    (mapc load-it (directory-files dir nil "\\.el$"))))
 
-;;----------------------------------------------------------------------------
-;; Temporarily reduce garbage collection during startup
-;;----------------------------------------------------------------------------
-(defconst sanityinc/initial-gc-cons-threshold gc-cons-threshold
-  "Initial value of `gc-cons-threshold' at start-up time.")
-(setq gc-cons-threshold (* 128 1024 1024))
-(add-hook 'after-init-hook
-          (lambda () (setq gc-cons-threshold sanityinc/initial-gc-cons-threshold)))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives `("melpa" . "http://melpa.org/packages/"))
 
-;;----------------------------------------------------------------------------
-;; Bootstrap config
-;;----------------------------------------------------------------------------
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(require 'init-compat)
-(require 'init-utils)
-(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
-;; Calls (package-initialize)
-(require 'init-elpa)      ;; Machinery for installing required packages
-(require 'init-exec-path) ;; Set up $PATH
+;; NOTE: In case of MELPA problems, the official mirror URL is
+;; https://www.mirrorservice.org/sites/stable.melpa.org/packages/
 
-;;----------------------------------------------------------------------------
-;; Allow users to provide an optional "init-preload-local.el"
-;;----------------------------------------------------------------------------
-(require 'init-preload-local nil t)
+
+;;; On-demand installation of packages
 
-;;----------------------------------------------------------------------------
-;; Load configs for specific features and modes
-;;----------------------------------------------------------------------------
-
-(require-package 'wgrep)
-(require-package 'project-local-variables)
-(require-package 'diminish)
-(require-package 'scratch)
-(require-package 'mwe-log-commands)
-
-(require 'init-frame-hooks)
-(require 'init-xterm)
-(require 'init-themes)
-(require 'init-osx-keys)
-(require 'init-gui-frames)
-(require 'init-dired)
-(require 'init-isearch)
-(require 'init-grep)
-(require 'init-uniquify)
-(require 'init-ibuffer)
-(require 'init-flycheck)
-
-(require 'init-recentf)
-(require 'init-smex)
-;; If you really prefer ido to ivy, change the comments below. I will
-;; likely remove the ido config in due course, though.
-;; (require 'init-ido)
-(require 'init-ivy)
-(require 'init-hippie-expand)
-(require 'init-company)
-(require 'init-windows)
-(require 'init-sessions)
-(require 'init-fonts)
-(require 'init-mmm)
-
-(require 'init-editing-utils)
-(require 'init-whitespace)
-(require 'init-fci)
-
-(require 'init-vc)
-(require 'init-darcs)
-(require 'init-git)
-(require 'init-github)
-
-(require 'init-projectile)
-
-(require 'init-compile)
-(require 'init-crontab)
-(require 'init-textile)
-(require 'init-markdown)
-(require 'init-csv)
-(require 'init-erlang)
-(require 'init-javascript)
-(require 'init-php)
-(require 'init-org)
-(require 'init-nxml)
-(require 'init-html)
-(require 'init-css)
-(require 'init-haml)
-(require 'init-python-mode)
-(unless (version<= emacs-version "24.3")
-  (require 'init-haskell))
-(require 'init-elm)
-(require 'init-ruby-mode)
-(require 'init-rails)
-(require 'init-sql)
-
-(require 'init-paredit)
-(require 'init-lisp)
-(require 'init-slime)
-(unless (version<= emacs-version "24.2")
-  (require 'init-clojure)
-  (require 'init-clojure-cider))
-(require 'init-common-lisp)
-
-(when *spell-check-support-enabled*
-  (require 'init-spelling))
-
-(require 'init-misc)
-
-(require 'init-folding)
-(require 'init-dash)
-(require 'init-ledger)
-;; Extra packages which don't require any configuration
-
-(require-package 'gnuplot)
-(require-package 'lua-mode)
-(require-package 'htmlize)
-(require-package 'dsvn)
-(when *is-a-mac*
-  (require-package 'osx-location))
-(require-package 'regex-tool)
-
-;;----------------------------------------------------------------------------
-;; Allow access from emacsclient
-;;----------------------------------------------------------------------------
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+(defun require-package (package &optional min-version no-refresh)
+  "Install given PACKAGE, optionally requiring MIN-VERSION.
+If NO-REFRESH is non-nil, the available package lists will not be
+re-downloaded in order to locate PACKAGE."
+  (if (package-installed-p package min-version)
+      t
+    (if (or (assoc package package-archive-contents) no-refresh)
+        (if (boundp 'package-selected-packages)
+            ;; Record this as a package the user installed explicitly
+            (package-install package nil)
+          (package-install package))
+      (progn
+        (package-refresh-contents)
+        (require-package package min-version t)))))
 
 
-;;----------------------------------------------------------------------------
-;; Variables configured via the interactive 'customize' interface
-;;----------------------------------------------------------------------------
-(when (file-exists-p custom-file)
-  (load custom-file))
+(defun maybe-require-package (package &optional min-version no-refresh)
+  "Try to install PACKAGE, and return non-nil if successful.
+In the event of failure, return nil and print a warning message.
+Optionally require MIN-VERSION.  If NO-REFRESH is non-nil, the
+available package lists will not be re-downloaded in order to
+locate PACKAGE."
+  (condition-case err
+      (require-package package min-version no-refresh)
+    (error
+     (message "Couldn't install package `%s': %S" package err)
+     nil)))
 
+
+;;; Fire up package.el
+; (setq package-enable-at-startup nil)
+(package-initialize)
 
-;;----------------------------------------------------------------------------
-;; Allow users to provide an optional "init-local" containing personal settings
-;;----------------------------------------------------------------------------
-(require 'init-local nil t)
-
-
-;;----------------------------------------------------------------------------
-;; Locales (setting them earlier in this file doesn't work in X)
-;;----------------------------------------------------------------------------
-(require 'init-locales)
-
-(add-hook 'after-init-hook
-          (lambda ()
-            (message "init completed in %.2fms"
-                     (sanityinc/time-subtract-millis after-init-time before-init-time))))
-
-
-(provide 'init)
-
-;; Local Variables:
-;; coding: utf-8
-;; no-byte-compile: t
-;; End:
+(load-directory "~/.emacs.d/init/")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(package-selected-packages
+   (quote
+    (highlight-parentheses parinfer smart-mode-line company sublimity default-text-scale smex monokai-theme flycheck-clojure elein cljsbuild-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
