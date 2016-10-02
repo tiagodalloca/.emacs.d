@@ -2,11 +2,22 @@
 (setq inhibit-startup-screen t)
 
 ;;TABS
+
+(defun my-generate-tab-stops (&optional width max)
+  "Return a sequence suitable for `tab-stop-list'."
+  (let* ((max-column (or max 200))
+         (tab-width (or width tab-width))
+         (count (/ max-column tab-width)))
+    (number-sequence tab-width (* tab-width count) tab-width)))
+
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
+(setq tab-stop-list (my-generate-tab-stops))
+; (global-set-key (kbd "<tab>") 'tab-to-tab-stop)
+; (electric-indent-mode -1)
 
 ;; FONTS
-(set-default-font "Consolas 13")
+(set-default-font "Consolas 12")
 (require-package 'default-text-scale)
 (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
 (global-set-key (kbd "C-M--") 'default-text-scale-decrease)
@@ -38,3 +49,9 @@
 (setq auto-save-file-name-transforms
   `((".*" ,(concat user-emacs-directory "~/auto-save-list/") t)))
 (setq backup-directory-alist `(("." . "~/auto-save-list/")))
+
+;; NO TOOLBAR
+(tool-bar-mode -1)
+
+;; NO SCROLLBAR
+(scroll-bar-mode -1)
