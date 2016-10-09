@@ -46,12 +46,17 @@
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 ;; TEMP FILES LOCATION
+;; store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
-  `((".*" ,(concat user-emacs-directory "~/auto-save-list/") t)))
-(setq backup-directory-alist `(("." . "~/auto-save-list/")))
+      `((".*" ,temporary-file-directory t)))
 
 ;; NO TOOLBAR
 (tool-bar-mode -1)
 
 ;; NO SCROLLBAR
 (scroll-bar-mode -1)
+
+;; I HATE THOSE ALARMS
+(setq ring-bell-function 'ignore)

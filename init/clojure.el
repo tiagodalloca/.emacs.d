@@ -13,16 +13,16 @@
 ;       '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))))
 
 
-(add-to-list 'load-path "~/.emacs.d/vendor/parinfer-mode/")
-(require 'parinfer-mode)
-(add-hook 'clojure-mode-hook #'parinfer-mode)
-(add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+(when (maybe-require-package 'lispy)
+  (add-hook 'clojure-mode-hook #'lispy-mode)
+  (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
+  (add-hook 'cider-repl-mode-hook #'lispy-mode))
 
 (when (maybe-require-package 'highlight-parentheses)
   (require 'highlight-parentheses)
-  (add-hook 'clojure-mode-hook #'highlight-parentheses)
-  (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses)
-  (add-hook 'cider-repl-mode-hook #'highlight-parentheses))
+  (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)
+  (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
+  (add-hook 'cider-repl-mode-hook #'highlight-parentheses-mode))
 
 (when (maybe-require-package 'clojure-snippets)
   (require 'clojure-snippets))

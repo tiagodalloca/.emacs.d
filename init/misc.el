@@ -28,3 +28,10 @@
 ; (require 'powerline)
 ; (require 'cl)
 ; (setq powerline-arrow-shape 'arrow14)
+
+(defun append-exec-path ()
+  "Append projectiles directories to 'exec-path'."
+  (when (functionp 'projectile-get-project-directories)
+    (when (projectile-project-p)
+      (dolist (path-dir (projectile-get-project-directories))
+        (setq exec-path (append exec-path (list path-dir)))))))
