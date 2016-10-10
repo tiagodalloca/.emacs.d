@@ -1,6 +1,12 @@
-(setq company-backends (delete 'company-semantic company-backends))
-(define-key c-mode-map  [(tab)] 'company-complete)
-(define-key c++-mode-map  [(tab)] 'company-complete)
+(eval-after-load 'company
+  '(progn 
+  	  (setq company-backends (delete 'company-semantic company-backends))
+  	  (add-hook 'c++-mode-hook 
+  	  	(lambda ()
+  	  	  (local-set-key (kbd "tab") 'company-complete)))
+  	  (add-hook 'c-mode-hook 
+  	  	(lambda ()
+  	  	  (local-set-key (kbd "tab") 'company-complete)))))
 
 (when (maybe-require-package 'irony)
   (progn
