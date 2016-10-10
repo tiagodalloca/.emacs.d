@@ -70,7 +70,7 @@ locate PACKAGE."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (company-irony flycheck-irony irony-cdb irony-server irony irony-mode lispy clojure-snippets highlight-parentheses parinfer smart-mode-line company sublimity default-text-scale smex monokai-theme flycheck-clojure elein cljsbuild-mode))))
+    (cmake-ide company-irony flycheck-irony irony-cdb irony-server irony irony-mode lispy clojure-snippets highlight-parentheses parinfer smart-mode-line company sublimity default-text-scale smex monokai-theme flycheck-clojure elein cljsbuild-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
