@@ -1,19 +1,15 @@
-(eval-after-load 'company
-  '(progn 
-  	  (setq company-backends (delete 'company-semantic company-backends))
-  	  (add-hook 'c++-mode-hook 
-  	  	(lambda ()
-  	  	  (local-set-key (kbd "tab") 'company-complete)))
-  	  (add-hook 'c-mode-hook 
-  	  	(lambda ()
-  	  	  (local-set-key (kbd "tab") 'company-complete)))))
+(defun from-emacsd
+    (str)
+  "from .emacs.d"
+  (convert-standard-filename
+   (expand-file-name
+    (concat "~/.emacs.d/" str))))
 
-(when (maybe-require-package 'irony)
+
+(when (maybe-require-package 'company-c-headers)
   (progn
-      (maybe-require-package 'flycheck-irony)
-      (maybe-require-package 'irony-server)))
-
-(add-hook 'c++-mode-hook 'flycheck-mode)
-(add-hook 'c-mode-hook 'flycheck-mode)
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+    (require 'company)
+    (require 'company-c-headers) 
+    (add-to-list 'company-backends 'company-c-headers)
+    (add-to-list 'company-c-headers-path-system
+                 (from-emacsd "/path/MingW/include/"))))

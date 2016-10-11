@@ -35,3 +35,6 @@
     (when (projectile-project-p)
       (dolist (path-dir (projectile-get-project-directories))
         (setq exec-path (append exec-path (list path-dir)))))))
+
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
