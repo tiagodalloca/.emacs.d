@@ -2,6 +2,8 @@
 /url/cache
 /.emacs.desktop
 /auto-save-list
+/irony
+
 /.session
 /session.*
 /custom.el

@@ -1,15 +1,10 @@
-(defun from-emacsd
-    (str)
-  "from .emacs.d"
-  (convert-standard-filename
-   (expand-file-name
-    (concat "~/.emacs.d/" str))))
+(require-package 'irony)
+(require-package 'flycheck-irony)
+(require-package 'company-irony)
 
-
-(when (maybe-require-package 'company-c-headers)
-  (progn
-    (require 'company)
-    (require 'company-c-headers) 
-    (add-to-list 'company-backends 'company-c-headers)
-    (add-to-list 'company-c-headers-path-system
-                 (from-emacsd "/path/MingW/include/"))))
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+(setq w32-pipe-read-delay 0)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))

@@ -53,6 +53,13 @@ locate PACKAGE."
      (message "Couldn't install package `%s': %S" package err)
      nil)))
 
+(defun from-emacsd
+    (str)
+  "from .emacs.d"
+  (convert-standard-filename
+   (expand-file-name
+    (concat "~/.emacs.d/" str))))
+
 
 ;;; Fire up package.el
 ; (setq package-enable-at-startup nil)

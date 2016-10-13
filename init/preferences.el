@@ -60,3 +60,6 @@
 
 ;; I HATE THOSE ALARMS
 (setq ring-bell-function 'ignore)
+
+;; shift for
+(global-set-key (kbd "S-SPC") 'company-complete)
