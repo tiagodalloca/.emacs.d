@@ -38,3 +38,6 @@
 
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-dabbrev-downcase 0)
+(setq company-idle-delay 0)
+(global-set-key (kbd "S-SPC") 'company-complete)

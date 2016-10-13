@@ -46,11 +46,14 @@
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 ;; TEMP FILES LOCATION
-;; store all backup and autosave files in the tmp dir
+;; Save all tempfiles in $TMPDIR/emacs$UID/
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+      `((".*" . ,emacs-tmp-dir)))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+      `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix
+      emacs-tmp-dir)
 
 ;; NO TOOLBAR
 (tool-bar-mode -1)
@@ -61,5 +64,5 @@
 ;; I HATE THOSE ALARMS
 (setq ring-bell-function 'ignore)
 
-;; shift for
-(global-set-key (kbd "S-SPC") 'company-complete)
+;; BAR CURSOR
+(setq-default cursor-type 'bar)
