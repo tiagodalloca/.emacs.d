@@ -1,6 +1,9 @@
 (require-package 'irony)
 (require-package 'flycheck-irony)
 (require-package 'company-irony)
+;; (require-package 'cmake-ide)
+
+;; (cmake-ide-setup)
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
