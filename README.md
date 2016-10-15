@@ -12,3 +12,4 @@ Initially, I was thinking of making this a private repository. But why not to ma
 - for **clojure** development
 - **c/c++** enviroment
 - Consolas font
+- Line numbers

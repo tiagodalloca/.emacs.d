@@ -40,6 +40,7 @@
 
 ;; LINE NUMBERS
 (global-linum-mode)
+(setq linum-format "%4d\u2502 ")
 
 ;; MAXIMIZED SCREEN
 (custom-set-variables
