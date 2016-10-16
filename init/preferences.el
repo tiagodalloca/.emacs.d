@@ -42,6 +42,10 @@
 (global-linum-mode)
 (setq linum-format "%4d\u2502 ")
 
+;; HIGHLIGHT CURRENT LINE
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#383830")
+
 ;; MAXIMIZED SCREEN
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))

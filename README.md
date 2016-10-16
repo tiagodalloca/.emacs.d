@@ -13,3 +13,4 @@ Initially, I was thinking of making this a private repository. But why not to ma
 - **c/c++** enviroment
 - Consolas font
 - Line numbers
+- Highlight current line
