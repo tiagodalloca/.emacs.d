@@ -19,12 +19,6 @@
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives `("melpa" . "http://melpa.org/packages/"))
 
-;; NOTE: In case of MELPA problems, the official mirror URL is
-;; https://www.mirrorservice.org/sites/stable.melpa.org/packages/
-
-
-;;; On-demand installation of packages
-
 (defun require-package (package &optional min-version no-refresh)
   "Install given PACKAGE, optionally requiring MIN-VERSION.
 If NO-REFRESH is non-nil, the available package lists will not be
@@ -39,7 +33,6 @@ re-downloaded in order to locate PACKAGE."
       (progn
         (package-refresh-contents)
         (require-package package min-version t)))))
-
 
 (defun maybe-require-package (package &optional min-version no-refresh)
   "Try to install PACKAGE, and return non-nil if successful.
@@ -60,12 +53,15 @@ locate PACKAGE."
    (expand-file-name
     (concat "~/.emacs.d/" str))))
 
+(load-directory (from-emacsd "vendor/"))
+(add-to-list 'load-path (from-emacsd "vendor/yasnippet-snippets/"))
+
 
 ;;; Fire up package.el
 ; (setq package-enable-at-startup nil)
 (package-initialize)
 
-(load-directory "~/.emacs.d/init/")
+(load-directory (from-emacsd "init/"))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -77,7 +73,7 @@ locate PACKAGE."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (markdown-mode cmake-ide company-irony flycheck-irony irony-cdb irony-server irony irony-mode lispy clojure-snippets highlight-parentheses parinfer smart-mode-line company sublimity default-text-scale smex monokai-theme flycheck-clojure elein cljsbuild-mode))))
+    (parinfer-mode markdown-mode cmake-ide company-irony flycheck-irony irony-cdb irony-server irony irony-mode lispy clojure-snippets highlight-parentheses parinfer smart-mode-line company sublimity default-text-scale smex monokai-theme flycheck-clojure elein cljsbuild-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
