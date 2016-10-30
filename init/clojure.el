@@ -28,10 +28,7 @@
 
 (def-pairs ((paren        . "(")
             (bracket      . "[")
-            (brace        . "{")
-            (single-quote . "'")
-            (double-quote . "\"")
-            (back-quote   . "`")))
+            (brace        . "{")))
 
 (when (maybe-require-package 'smartparens)
   (progn
@@ -47,10 +44,10 @@
        ("C-M-a" . sp-beginning-of-sexp)
        ("C-M-e" . sp-end-of-sexp)
        
-       ("C-<down>" . sp-down-sexp)
-       ("C-<up>"   . sp-up-sexp)
-       ("M-<down>" . sp-backward-down-sexp)
-       ("M-<up>"   . sp-backward-up-sexp)
+       ("C-M-j"   . sp-down-sexp)
+       ("C-M-i"   . sp-backward-up-sexp)
+       ("C-j" . sp-backward-down-sexp)
+       ("C-i" . sp-up-sexp)
 
        ("C-M-f" . sp-forward-sexp)
        ("C-M-b" . sp-backward-sexp)
@@ -61,38 +58,34 @@
        ("C-S-f" . sp-forward-symbol)
        ("C-S-b" . sp-backward-symbol)
        
-        ("C-<right>" . sp-forward-slurp-sexp)
-        ("M-<right>" . sp-forward-barf-sexp)
-        ("C-<left>"  . sp-backward-slurp-sexp)
-        ("M-<left>"  . sp-backward-barf-sexp)
-        
-        ("C-M-t" . sp-transpose-sexp)
-        ("C-M-k" . sp-kill-sexp)
-        ("C-k"   . sp-kill-hybrid-sexp)
-        ("M-k"   . sp-backward-kill-sexp)
-        ("C-M-w" . sp-copy-sexp)
+       ("C-<right>" . sp-forward-slurp-sexp)
+       ("M-<right>" . sp-forward-barf-sexp)
+       ("C-<left>"  . sp-backward-slurp-sexp)
+       ("M-<left>"  . sp-backward-barf-sexp)
+       
+       ("C-M-t" . sp-transpose-sexp)
+       ("C-M-k" . sp-kill-sexp)
+       ("C-k"   . sp-kill-hybrid-sexp)
+       ("M-k"   . sp-backward-kill-sexp)
+       ("C-M-w" . sp-copy-sexp)
 
-        ("C-M-d" . delete-sexp)
+       ("C-M-d" . sp-delete-sexp)
+       ("C-<backspace>" . sp-backward-kill-word)
+       ([remap sp-backward-kill-word] . backward-kill-word)
 
-        ("M-<backspace>" . backward-kill-word)
-        ("C-<backspace>" . sp-backward-kill-word)
-        ([remap sp-backward-kill-word] . backward-kill-word)
+       ("M-[" . sp-backward-unwrap-sexp)
+       ("M-]" . sp-unwrap-sexp)
 
-        ("M-[" . sp-backward-unwrap-sexp)
-        ("M-]" . sp-unwrap-sexp)
+       ("C-x C-t" . sp-transpose-hybrid-sexp)
 
-        ("C-x C-t" . sp-transpose-hybrid-sexp)
-
-        ("C-c ("  . wrap-with-parens)
-        ("C-c ["  . wrap-with-brackets)
-        ("C-c {"  . wrap-with-braces)
-        ("C-c '"  . wrap-with-single-quotes)
-        ("C-c \"" . wrap-with-double-quotes)
-        ("C-c _"  . wrap-with-underscores)
-        ("C-c `"  . wrap-with-back-quotes))
+       ("C-c ("  . wrap-with-parens)
+       ("C-c ["  . wrap-with-brackets)
+       ("C-c {"  . wrap-with-braces)
+       ("C-c '"  . wrap-with-single-quotes)
+       ("C-c \"" . wrap-with-double-quotes)
+       ("C-c _"  . wrap-with-underscores)
+       ("C-c `"  . wrap-with-back-quotes))
       :ensure smartparens)))
-
-
 
 (when (maybe-require-package 'highlight-parentheses)
   (require 'highlight-parentheses)
