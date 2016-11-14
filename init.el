@@ -49,7 +49,7 @@ locate PACKAGE."
      nil)))
 
 
-(setq my-package
+(setq my-packages
       '(ample-theme
         arduino-mode
         cider
@@ -76,7 +76,12 @@ locate PACKAGE."
 
 (defun install-packages (package-list)
   "Install all the packages there"
-  (mapcar require-package package-list))
+  (mapcar #'require-package package-list))
+
+(defun asdf
+    ()
+  "asdf"
+  (install-packages my-packages))
 
 (defun from-emacsd
     (str)
@@ -101,3 +106,18 @@ locate PACKAGE."
 (load-file (from-emacsd "init/add-path.el"))
 (load-file (from-emacsd "init/misc.el"))
 (load-file (from-emacsd "init/themes.el"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(package-selected-packages
+   (quote
+    (smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony company-irony cider arduino-mode ample-theme diminish))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
