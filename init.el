@@ -10,6 +10,8 @@
 (require 'package)
 (package-initialize)
 
+;; (setq gc-cons-threshold 100000000)
+
 (defun load-directory (dir)
   (let ((load-it
           (lambda (f)
@@ -46,6 +48,36 @@ locate PACKAGE."
      (message "Couldn't install package `%s': %S" package err)
      nil)))
 
+
+(setq my-package
+      '(ample-theme
+        arduino-mode
+        cider
+        clojure-mode
+        company-irony
+        company
+        diminish
+        flycheck-irony
+        flycheck
+        highlight-parentheses
+        irony
+        js2-mode
+        multiple-cursors
+        powerline
+        projectile
+        pkg-info
+        epl
+        queue
+        seq
+        smartparens
+        dash
+        smex
+        spinner))
+
+(defun install-packages (package-list)
+  "Install all the packages there"
+  (mapcar require-package package-list))
+
 (defun from-emacsd
     (str)
   "from .emacs.d"
@@ -64,19 +96,8 @@ locate PACKAGE."
 ;;; Fire up package.el
 (setq package-enable-at-startup nil)
 
-(load-directory (from-emacsd "init/"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(package-selected-packages
-   (quote
-    (ample-theme powerline projectile multiple-cursors smex highlight-parentheses smartparens cider flycheck-irony company irony diminish))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(load-file (from-emacsd "init/languages.el"))
+(load-file (from-emacsd "init/preferences.el"))
+(load-file (from-emacsd "init/add-path.el"))
+(load-file (from-emacsd "init/misc.el"))
+(load-file (from-emacsd "init/themes.el"))

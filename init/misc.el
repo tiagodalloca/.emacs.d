@@ -1,30 +1,34 @@
 ;; Use smex to handle M-x
-(when (maybe-require-package 'smex)
+(use-package smex
+  :config
   ;; Change path for ~/.smex-items
-  (setq-default smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
-  (global-set-key [remap execute-extended-command] 'smex))
+  (progn
+    (setq-default smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
+    (global-set-key [remap execute-extended-command] 'smex)))
 
 
-(when (maybe-require-package 'flycheck)
-  (use-package flycheck
-    :config
-    (progn
-      (global-flycheck-mode)
-      (diminish 'flycheck-mode))))
 
-(when (maybe-require-package 'multiple-cursors)
-  (require 'multiple-cursors)
+(use-package flycheck
+  :defer t
+  :config
+  (add-hook 'prog-mode-hook #'flycheck-mode)
+  :diminish flycheck-mode)
+
+(use-package multiple-cursors
+  :config
   (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 
-(when (maybe-require-package 'projectile)
-  (use-package projectile
-    :config
-    (projectile-global-mode)
-    :diminish 'projectile-mode))
+(use-package projectile
+  :commands (dired-mode
+             help-mode
+             projectile-mode)
+  :init
+  (projectile-global-mode)
+  :diminish 'projectile-mode)
 
 
-(when (maybe-require-package 'powerline)
-  (require 'powerline)
+(use-package powerline
+  :config
   (powerline-default-theme))
 
 ; (when (maybe-require-package 'smart-mode-line)
@@ -46,17 +50,18 @@
       (dolist (path-dir (projectile-get-project-directories))
         (setq exec-path (append exec-path (list path-dir)))))))
 
-(when (maybe-require-package 'company)
-  (use-package company
-   :config
-   (progn
-     (add-hook 'after-init-hook 'global-company-mode)
-     (setq company-dabbrev-downcase 0)
-     (setq company-idle-delay 0)
-     (global-company-mode)
-     (diminish 'company-mode))  
-    :bind
-    (("S-SPC" . company-complete))))
+(use-package company
+  :defer t
+  :config
+  (progn
+    (add-hook 'after-init-hook 'global-company-mode)
+    (setq company-dabbrev-downcase 0)
+    (setq company-idle-delay 0)
+    (global-company-mode)
+    (diminish 'company-mode))  
+  :bind
+  (("S-SPC" . company-complete)))
 
 (use-package abbrev
+  :defer t
   :diminish 'abbrev-mode)

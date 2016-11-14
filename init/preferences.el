@@ -18,11 +18,7 @@
 
 ;; FONTS
 (set-default-font "Consolas 12")
-(use-package default-text-scale
-  :config
-  (progn
-    (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
-    (global-set-key (kbd "C-M--") 'default-text-scale-decrease)))
+
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
 (use-package ido
