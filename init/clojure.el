@@ -1,9 +1,3 @@
-(require 'use-package)
-
-(when (maybe-require-package 'clojure-mode)
-  (require-package 'cljsbuild-mode)
-  (require-package 'elein))
-
 (when (maybe-require-package 'cider)
   (setq nrepl-popup-stacktraces nil))
 
@@ -33,12 +27,13 @@
 (when (maybe-require-package 'smartparens)
   (progn
     (use-package
-      smartparens-config
+      smartparens
       :init
       (progn
         (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
         (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
-        (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode))
+        (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+        (unbind-key "\t"))
       :bind
       (:map smartparens-mode-map
        ("C-M-a" . sp-beginning-of-sexp)
@@ -84,14 +79,20 @@
        ("C-c '"  . wrap-with-single-quotes)
        ("C-c \"" . wrap-with-double-quotes)
        ("C-c _"  . wrap-with-underscores)
-       ("C-c `"  . wrap-with-back-quotes))
-      :ensure smartparens)))
+       ("C-c `"  . wrap-with-back-quotes)
+       ("\t"  . indent-region))
+      :config
+      (progn
+        (sp-pair "'" nil :actions :rem))
+      :diminish 'smartparens-mode)))
 
 (when (maybe-require-package 'highlight-parentheses)
-  (require 'highlight-parentheses)
-  (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)
-  (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
-  (add-hook 'cider-repl-mode-hook #'highlight-parentheses-mode))
+  (use-package highlight-parentheses
+    :config
+    (progn
+      (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)
+      (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
+      (add-hook 'cider-repl-mode-hook #'highlight-parentheses-mode))))
 
 (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
 

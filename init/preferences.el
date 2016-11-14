@@ -18,22 +18,25 @@
 
 ;; FONTS
 (set-default-font "Consolas 12")
-(require-package 'default-text-scale)
-(global-set-key (kbd "C-M-=") 'default-text-scale-increase)
-(global-set-key (kbd "C-M--") 'default-text-scale-decrease)
-
+(use-package default-text-scale
+  :config
+  (progn
+    (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
+    (global-set-key (kbd "C-M--") 'default-text-scale-decrease)))
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
-(require 'ido)
-(ido-mode 1)
-(ido-everywhere 1)
-(setq ido-enable-flex-matching t)
-(setq ido-create-new-buffer 'always)
-(setq ido-enable-tramp-completion nil)
-(setq ido-enable-last-directory-history nil)
-(setq ido-confirm-unique-completion nil) ;; wait for RET, even for unique?
-(setq ido-show-dot-for-dired t) ;; put . as the first item
-(setq ido-use-filename-at-point t) ;; prefer file names near point
+(use-package ido
+  :config
+  (progn
+    (ido-mode 1)
+    (ido-everywhere 1)
+    (setq ido-enable-flex-matching t)
+    (setq ido-create-new-buffer 'always)
+    (setq ido-enable-tramp-completion nil)
+    (setq ido-enable-last-directory-history nil)
+    (setq ido-confirm-unique-completion nil)
+    (setq ido-show-dot-for-dired t)
+    (setq ido-use-filename-at-point t)))
 
 ;; ENCONDING
 (prefer-coding-system 'utf-8)
@@ -43,8 +46,11 @@
 (setq linum-format "%4d\u2502 ")
 
 ;; HIGHLIGHT CURRENT LINE
-(global-hl-line-mode 1)
-(set-face-background 'hl-line "#383830")
+(use-package hl-line
+  :config
+  (progn
+    (global-hl-line-mode 1))
+  :diminish 'highlight-parentheses-mode)
 
 ;; MAXIMIZED SCREEN
 (custom-set-variables
@@ -71,3 +77,6 @@
 
 ;; BAR CURSOR
 (setq-default cursor-type 'bar)
+
+;; DELETE REGION
+(delete-selection-mode 1)

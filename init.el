@@ -54,33 +54,14 @@ locate PACKAGE."
     (concat "~/.emacs.d/" str))))
 
 (load-directory (from-emacsd "vendor/"))
+
+(require 'use-package)
+(require-package 'diminish)
+
 (add-to-list 'load-path (from-emacsd "vendor/yasnippet-snippets/"))
 
 
 ;;; Fire up package.el
-; (setq package-enable-at-startup nil)
-(package-initialize)
+(setq package-enable-at-startup nil)
 
 (load-directory (from-emacsd "init/"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(package-selected-packages
-   (quote
-    (parinfer-mode markdown-mode cmake-ide company-irony flycheck-irony irony-cdb irony-server irony irony-mode lispy clojure-snippets highlight-parentheses parinfer smart-mode-line company sublimity default-text-scale smex monokai-theme flycheck-clojure elein cljsbuild-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.

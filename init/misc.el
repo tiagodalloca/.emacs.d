@@ -1,16 +1,26 @@
+;; Use smex to handle M-x
+(when (maybe-require-package 'smex)
+  ;; Change path for ~/.smex-items
+  (setq-default smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
+  (global-set-key [remap execute-extended-command] 'smex))
+
+
 (when (maybe-require-package 'flycheck)
-   (global-flycheck-mode))
+  (use-package flycheck
+    :config
+    (progn
+      (global-flycheck-mode)
+      (diminish 'flycheck-mode))))
 
 (when (maybe-require-package 'multiple-cursors)
   (require 'multiple-cursors)
   (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 
 (when (maybe-require-package 'projectile)
-  (require 'projectile)
-  (projectile-global-mode))
-
-(when (maybe-require-package 'company)
-  (global-company-mode))
+  (use-package projectile
+    :config
+    (projectile-global-mode)
+    :diminish 'projectile-mode))
 
 
 (when (maybe-require-package 'powerline)
@@ -36,8 +46,17 @@
       (dolist (path-dir (projectile-get-project-directories))
         (setq exec-path (append exec-path (list path-dir)))))))
 
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-dabbrev-downcase 0)
-(setq company-idle-delay 0)
-(global-set-key (kbd "S-SPC") 'company-complete)
+(when (maybe-require-package 'company)
+  (use-package company
+   :config
+   (progn
+     (add-hook 'after-init-hook 'global-company-mode)
+     (setq company-dabbrev-downcase 0)
+     (setq company-idle-delay 0)
+     (global-company-mode)
+     (diminish 'company-mode))  
+    :bind
+    (("S-SPC" . company-complete))))
+
+(use-package abbrev
+  :diminish 'abbrev-mode)
