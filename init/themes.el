@@ -4,8 +4,7 @@
 ;;     (setq monokai-highlight-line "#3e3d32")))
 
 (use-package ample-theme
-  :init
+  :config
   (progn
     (load-theme 'ample t t)
-    (enable-theme 'ample))
-  :defer t)
+    (enable-theme 'ample)))
