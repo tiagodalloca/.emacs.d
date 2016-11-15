@@ -110,9 +110,10 @@
 
 (use-package
   smartparens
-  :commands (clojure-mode
-             emacs-lisp-mode
-             cider-repl-mode)
+  :commands (clojure-mode-hook
+             emacs-lisp-mode-hook
+             cider-repl-mode-hook
+             lisp-interaction-mode-hook)
   :init
   (progn
     (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
@@ -173,7 +174,8 @@
 (use-package highlight-parentheses
   :commands (clojure-mode-hook
              emacs-lisp-mode-hook
-             cider-repl-mode-hook)
+             cider-repl-mode-hook
+             lisp-interaction-mode-hook)
   :init
   (progn
     (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)

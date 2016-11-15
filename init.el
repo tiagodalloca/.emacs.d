@@ -50,7 +50,8 @@ locate PACKAGE."
 
 
 (setq my-packages
-      '(ample-theme
+      '(ivy
+        tangotango-theme
         arduino-mode
         cider
         clojure-mode
@@ -93,9 +94,7 @@ locate PACKAGE."
 (load-directory (from-emacsd "vendor/"))
 
 (require 'use-package)
-(require-package 'diminish)
-
-(add-to-list 'load-path (from-emacsd "vendor/yasnippet-snippets/"))
+(require 'diminish)
 
 
 ;;; Fire up package.el
@@ -114,7 +113,7 @@ locate PACKAGE."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony company-irony cider arduino-mode ample-theme diminish))))
+    (helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
