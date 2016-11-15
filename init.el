@@ -71,8 +71,7 @@ locate PACKAGE."
         queue
         seq
         smartparens
-        dash
-        smex
+        dash        
         spinner))
 
 (defun install-packages (package-list)
