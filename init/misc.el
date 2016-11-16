@@ -12,6 +12,12 @@
 (use-package swiper :ensure
   :defer t)
 
+(use-package ag :ensure
+  :defer t)
+
+(use-package counsel-projectile :ensure
+  :defer t)
+
 (use-package ivy :ensure
   :diminish (ivy-mode . "")
   :bind
