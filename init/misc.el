@@ -48,10 +48,13 @@
     ;;   :defer t
     ;;   :init
     ;;   (counsel-projectile-on))
-    (use-package projectile :ensure
-      :defer t
-      :config
-      (setq projectile-completion-system 'ivy))))
+    (eval-after-load 'counsel-projectile
+      '(counsel-projectile-on))
+    ;; (use-package projectile :ensure
+    ;;   :defer t
+    ;;   :config
+    ;;   (setq projectile-completion-system 'ivy))))
+    ))
 
 
 (use-package flycheck :ensure
