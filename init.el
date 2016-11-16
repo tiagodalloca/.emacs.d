@@ -71,7 +71,7 @@ locate PACKAGE."
         queue
         seq
         smartparens
-        dash        
+        dash    
         spinner))
 
 (defun install-packages (package-list)
@@ -93,7 +93,8 @@ locate PACKAGE."
 (load-directory (from-emacsd "vendor/"))
 
 (require 'use-package)
-(require 'diminish)
+
+(require-package 'diminish)
 
 
 ;;; Fire up package.el
@@ -112,7 +113,7 @@ locate PACKAGE."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
+    (counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

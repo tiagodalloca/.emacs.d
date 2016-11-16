@@ -6,42 +6,59 @@
 ;;     (setq-default smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
 ;;     (global-set-key [remap execute-extended-command] 'smex)))
 
-(use-package ivy
-  :defer t
-  :config
-  (ivy-mode 1)
+(use-package counsel :ensure
+  :defer t)
+
+(use-package swiper :ensure
+  :defer t)
+
+(use-package ivy :ensure
+  :diminish (ivy-mode . "")
   :bind
-  (( "\C-s"     . swiper)
-   ( "C-c C-r"  . ivy-resume)
-   ( "<f6>"     . ivy-resume)
-   (  "M-x"     . counsel-M-x)
-   (  "C-x C-f" . counsel-find-file)
-   (  "<f1> f"  . counsel-describe-function)
-   (  "<f1> v"  . counsel-describe-variable)
-   (  "<f1> l"  . counsel-load-library)
-   (  "<f2> i"  . counsel-info-lookup-symbol)
-   (  "<f2> u"  . counsel-unicode-char)
-   (  "C-c g"   . counsel-git)
-   (  "C-c j"   . counsel-git-grep)
-   (  "C-c k"   . counsel-ag)
-   (  "C-x l"   . counsel-locate)
-   (  "C-S-o"   . counsel-rhythmbox))
+  (( "\C-s"    . swiper)
+   ( "C-S-s"   . swiper-all)
+   ( "C-c C-r" . ivy-resume)
+   ( "C-x b"   . ivy-switch-buffer)
+   ( "C-x C-b" . ivy-switch-buffer)
+   ( "M-x"     . counsel-M-x)
+   ( "C-x C-f" . counsel-find-file)
+   ( "<f1> f"  . counsel-describe-function)
+   ( "<f1> v"  . counsel-describe-variable)
+   ( "<f2> i"  . counsel-info-lookup-symbol)
+   ( "<f2> u"  . counsel-unicode-char)
+   ( "C-c g"   . counsel-git)
+   ( "C-c j"   . counsel-git-grep)
+   ( "C-c k"   . counsel-ag)
+   ( "C-x l"   . counsel-locate)
+   ( "C-S-o"   . counsel-rhythmbox))
+  :init
+  (ivy-mode 1)
   :config
   (progn
-    (setq ivy-use-virtual-buffers t))
-  :diminish 'ivy-mode)
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "")
+    (setq ivy-height 10)
+    ;; (use-package counsel-projectile
+    ;;   :defer t
+    ;;   :init
+    ;;   (counsel-projectile-on))
+    (use-package projectile :ensure
+      :defer t
+      :config
+      (setq projectile-completion-system 'ivy))))
 
-(use-package flycheck
+
+(use-package flycheck :ensure
   :defer t
   :config
   (add-hook 'prog-mode-hook #'flycheck-mode)
   :diminish flycheck-mode)
 
-(use-package multiple-cursors
+(use-package multiple-cursors :ensure
   :config
   (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 
-(use-package projectile
+(use-package projectile :ensure
   :defer t
   :commands (dired-mode
              help-mode
@@ -51,7 +68,7 @@
   :diminish 'projectile-mode)
 
 
-(use-package powerline
+(use-package powerline :ensure
   :config
   (powerline-default-theme))
 
@@ -74,7 +91,7 @@
       (dolist (path-dir (projectile-get-project-directories))
         (setq exec-path (append exec-path (list path-dir)))))))
 
-(use-package company
+(use-package company :ensure
   :defer t
   :config
   (progn

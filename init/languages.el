@@ -11,7 +11,7 @@
 ;;  ▀▀▀▀▀▀▀▀▀▀▀                         ▀▀▀▀▀▀▀▀▀▀▀  ▀            ▀
 
 
-(use-package irony
+(use-package irony :ensure
   :commands (c++-mode-hook
              c-mode-hook
              objc-mode-hook)
@@ -23,20 +23,20 @@
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
     (setq w32-pipe-read-delay 0)))
 
-(use-package company-irony
+(use-package company-irony :ensure
   :commands irony-mode-hook
   :init
   (eval-after-load 'company
     '(add-to-list 'company-backends 'company-irony)))
 
-(use-package flycheck-irony
+(use-package flycheck-irony :ensure
   :commands irony-mode-hook
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-(use-package arduino-mode
+(use-package arduino-mode :ensure
   :defer t
   :init
   (progn
@@ -62,7 +62,7 @@
 ;;  ▀▀▀▀▀▀▀      ▀▀▀▀▀▀▀▀▀▀▀
 
 
-(use-package js2-mode
+(use-package js2-mode :ensure
   :defer t)
 
 ;;
@@ -79,7 +79,7 @@
 ;;  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀
 
 
-(use-package cider
+(use-package cider :ensure
   :commands (clojure-mode-hook
              cider-repl-mode-hook)
   :config
@@ -108,8 +108,7 @@
             (bracket      . "[")
             (brace        . "{")))
 
-(use-package
-  smartparens
+(use-package smartparens :ensure
   :commands (clojure-mode-hook
              emacs-lisp-mode-hook
              cider-repl-mode-hook
@@ -171,7 +170,7 @@
   (sp-pair "'" nil :actions :rem)
   :diminish 'smartparens-mode)
 
-(use-package highlight-parentheses
+(use-package highlight-parentheses :ensure
   :commands (clojure-mode-hook
              emacs-lisp-mode-hook
              cider-repl-mode-hook
