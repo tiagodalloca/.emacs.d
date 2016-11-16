@@ -49,39 +49,9 @@ locate PACKAGE."
      nil)))
 
 
-(setq my-packages
-      '(ivy
-        tangotango-theme
-        arduino-mode
-        cider
-        clojure-mode
-        company-irony
-        company
-        diminish
-        flycheck-irony
-        flycheck
-        highlight-parentheses
-        irony
-        js2-mode
-        multiple-cursors
-        powerline
-        projectile
-        pkg-info
-        epl
-        queue
-        seq
-        smartparens
-        dash    
-        spinner))
-
 (defun install-packages (package-list)
   "Install all the packages there"
   (mapcar #'require-package package-list))
-
-(defun asdf
-    ()
-  "asdf"
-  (install-packages my-packages))
 
 (defun from-emacsd
     (str)
@@ -94,9 +64,8 @@ locate PACKAGE."
 
 (require 'use-package)
 
-(require-package 'diminish)
+(use-package diminish :ensure)
 
-
 ;;; Fire up package.el
 (setq package-enable-at-startup nil)
 
@@ -105,18 +74,4 @@ locate PACKAGE."
 (load-file (from-emacsd "init/add-path.el"))
 (load-file (from-emacsd "init/misc.el"))
 (load-file (from-emacsd "init/themes.el"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(package-selected-packages
-   (quote
-    (counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
