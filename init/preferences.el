@@ -64,3 +64,8 @@
 
 ;; DELETE REGION
 (delete-selection-mode 1)
+
+;;BINDININGS
+(global-set-key [f5] (lambda ()
+                       (interactive)
+                       (revert-buffer nil t)))
