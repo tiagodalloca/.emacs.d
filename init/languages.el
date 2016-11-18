@@ -83,7 +83,9 @@
   :commands (clojure-mode-hook
              cider-repl-mode-hook)
   :config
-  (setq nrepl-popup-stacktraces nil))
+  (progn
+    (setq cider-popup-stacktraces nil)
+    (setq nrepl-popup-stacktraces nil)))
 
 ; (when (maybe-require-package 'flycheck-clojure)
 ;   (eval-after-load 'flycheck '(flycheck-clojure-setup))
@@ -106,7 +108,8 @@
 
 (def-pairs ((paren        . "(")
             (bracket      . "[")
-            (brace        . "{")))
+            (brace        . "{")
+            (double-quote . "\"")))
 
 (use-package smartparens :ensure
   :commands (clojure-mode-hook
@@ -168,6 +171,7 @@
         ("\t"  . indent-region))
   :config
   (sp-pair "'" nil :actions :rem)
+  (sp-pair "`" nil :actions :rem)
   :diminish 'smartparens-mode)
 
 (use-package highlight-parentheses :ensure
