@@ -82,10 +82,16 @@
 (use-package cider :ensure
   :commands (clojure-mode-hook
              cider-repl-mode-hook)
-  :config
+  :init
   (progn
     (setq cider-popup-stacktraces nil)
     (setq nrepl-popup-stacktraces nil)))
+
+(setq all-lisps
+      '(clojure-mode-hook
+        emacs-lisp-mode-hook
+        cider-repl-mode-hook
+        lisp-interaction-mode-hook))
 
 ; (when (maybe-require-package 'flycheck-clojure)
 ;   (eval-after-load 'flycheck '(flycheck-clojure-setup))
@@ -112,10 +118,7 @@
             (double-quote . "\"")))
 
 (use-package smartparens :ensure
-  :commands (clojure-mode-hook
-             emacs-lisp-mode-hook
-             cider-repl-mode-hook
-             lisp-interaction-mode-hook)
+  :commands all-lisps
   :init
   (progn
     (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
@@ -175,16 +178,22 @@
   :diminish 'smartparens-mode)
 
 (use-package highlight-parentheses :ensure
-  :commands (clojure-mode-hook
-             emacs-lisp-mode-hook
-             cider-repl-mode-hook
-             lisp-interaction-mode-hook)
+  :commands all-lisps
   :init
   (progn
     (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)
     (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
     (add-hook 'cider-repl-mode-hook #'highlight-parentheses-mode))
   :diminish highlight-parentheses-mode)
+
+(use-package aggressive-indent :ensure
+  :commands all-lisps
+  :init
+  (progn
+    (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+    (add-hook 'cider-repl-mode-hook #'aggressive-indent-mode))
+  :diminish t)
 
 (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
 
