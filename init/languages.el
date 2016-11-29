@@ -79,13 +79,34 @@
 ;;  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀
 
 
+(defun clear-repl ()
+  (interactive)
+  (cider-clear-repl-buffer nil t))
+
+(use-package clojure-mode
+  :config
+  (define-clojure-indent
+    (defroutes 'defun)
+    (GET 2)
+    (POST 2)
+    (PUT 2)
+    (DELETE 2)
+    (HEAD 2)
+    (ANY 2)
+    (context 2)))
+
 (use-package cider :ensure
   :commands (clojure-mode-hook
              cider-repl-mode-hook)
   :init
   (progn
     (setq cider-popup-stacktraces nil)
-    (setq nrepl-popup-stacktraces nil)))
+    (setq nrepl-popup-stacktraces nil))
+  :bind
+  (("C-c C-j r" . cider-refresh)
+   ("C-c C-j u" . cider-user-ns)
+   ("C-c C-j c" . cider-repl-clear-buffer))
+  :diminish cider-mode)
 
 (setq all-lisps
       '(clojure-mode-hook
@@ -93,24 +114,17 @@
         cider-repl-mode-hook
         lisp-interaction-mode-hook))
 
-; (when (maybe-require-package 'flycheck-clojure)
-;   (eval-after-load 'flycheck '(flycheck-clojure-setup))
-;   (add-hook 'after-init-hook #'global-flycheck-mode)
-;   (when (maybe-require-package 'flycheck-pos-tip)
-;     (eval-after-load 'flycheck
-;       '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))))
-
 (defmacro def-pairs (pairs)
   `(progn
      ,@(loop for (key . val) in pairs
-          collect
-            `(defun ,(read (concat
-                            "wrap-with-"
-                            (prin1-to-string key)
-                            "s"))
-                 (&optional arg)
-               (interactive "p")
-               (sp-wrap-with-pair ,val)))))
+             collect
+             `(defun ,(read (concat
+                             "wrap-with-"
+                             (prin1-to-string key)
+                             "s"))
+                  (&optional arg)
+                (interactive "p")
+                (sp-wrap-with-pair ,val)))))
 
 (def-pairs ((paren        . "(")
             (bracket      . "[")
@@ -193,13 +207,9 @@
     (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
     (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
     (add-hook 'cider-repl-mode-hook #'aggressive-indent-mode))
-  :diminish t)
+  :diminish aggressive-indent-mode)
 
 (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
-
-(add-hook 'cider-repl-mode-hook #'electric-pair-mode)
-(add-hook 'clojure-mode-hook #'electric-pair-mode)
-(add-hook 'emacs-lisp-mode-hook #'electric-pair-mode)
 
 ;;  ▄▄       ▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄    ▄  ▄▄▄▄▄▄▄▄▄▄  
 ;; ▐░░▌     ▐░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌  ▐░▌▐░░░░░░░░░░▌ 
@@ -212,7 +222,7 @@
 ;; ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌      ▐░▌ ▐░▌ ▐░▌ ▐░█▄▄▄▄▄▄▄█░▌
 ;; ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░▌  ▐░▌▐░░░░░░░░░░▌ 
 ;;  ▀         ▀  ▀         ▀  ▀         ▀  ▀    ▀  ▀▀▀▀▀▀▀▀▀▀  
-                                                            
+
 
 (use-package markdown-mode :ensure
   :commands (markdown-mode gfm-mode)
