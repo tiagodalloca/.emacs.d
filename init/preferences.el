@@ -10,14 +10,18 @@
          (count (/ max-column tab-width)))
     (number-sequence tab-width (* tab-width count) tab-width)))
 
-(setq-default indent-tabs-mode nil)
-(setq tab-width 2)
-(setq tab-stop-list (my-generate-tab-stops))
-; (global-set-key (kbd "<tab>") 'tab-to-tab-stop)
-; (electric-indent-mode -1)
+(setq-default indent-tabs-mode t)
+(setq-default tab-width 2)
+(setq-default c-basic-offset 2)
+;; (setq tab-stop-list (my-generate-tab-stops))
+;; (global-set-key (kbd "<tab>") 'tab-to-tab-stop)
+;; (electric-indent-mode -1)
 
 ;; FONTS
-(set-default-font "Consolas 12")
+;; (set-default-font "UbuntoMono 12")
+(add-to-list 'default-frame-alist
+             '(font . "Ubuntu Mono-13"))
+
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -27,7 +31,8 @@
 
 ;; LINE NUMBERS
 (global-linum-mode)
-(setq linum-format "%4d\u2502 ")
+;; (setq linum-format "%4d\u2502 ")
+(setq linum-format "%4d ")
 
 ;; HIGHLIGHT CURRENT LINE
 (use-package hl-line

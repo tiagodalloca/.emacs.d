@@ -65,6 +65,14 @@
 (use-package js2-mode :ensure
   :defer t)
 
+(use-package php-mode :ensure
+  :defer t)
+
+(use-package emmet-mode :ensure
+  :defer t)
+
+
+
 ;;
 ;;  ▄            ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
 ;; ▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
