@@ -19,9 +19,17 @@
 
 ;; FONTS
 ;; (set-default-font "UbuntoMono 12")
-(add-to-list 'default-frame-alist
-             '(font . "Ubuntu Mono-13"))
+(defun font-exists-p (font)
+	"check if font exists"
+	(if (null (x-list-fonts font))
+			nil t))
+(defun set-font-if-exists (font)
+	"set font if it exists"
+	(if (font-exists-p font)
+			(set-face-attribute 'default nil :font font)))
 
+(set-face-attribute 'default nil :font "Consolas-12")
+(set-font-if-exists "Ubuntu Mono-13")
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
