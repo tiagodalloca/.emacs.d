@@ -110,15 +110,20 @@
     (global-company-mode)
     (diminish 'company-mode))  
   :bind
-  (("S-SPC" . company-complete)
-	 ("C-<tab>" . company-yasnippet)))
+  (("S-SPC" . company-complete)))
 
 (use-package yasnippet :ensure
+	:defer t
+	:bind
+	(:map
+	 yas-minor-mode-map
+	 ("C-c <tab>" . company-yasnippet))
 	:config
 	(yas-global-mode 1)
 	:diminish 'yas-minor-mode)
 
-(use-package s :ensure)
+(use-package s :ensure
+	:defer t)
 
 (use-package abbrev
   :defer t

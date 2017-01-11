@@ -1,6 +1,7 @@
 ﻿;; C/CPP
 
 (use-package irony :ensure
+	:defer t
   :commands (c++-mode-hook
              c-mode-hook
              objc-mode-hook)
@@ -13,6 +14,7 @@
     (setq w32-pipe-read-delay 0)))
 
 (use-package company-irony :ensure
+	:defer t
   :commands irony-mode-hook
   :init
   (eval-after-load 'company
@@ -59,7 +61,8 @@
   (interactive)
   (cider-clear-repl-buffer nil t))
 
-(use-package clojure-mode 
+(use-package clojure-mode
+	:defer t
   :config
   (progn (define-clojure-indent
 					 (defroutes 'defun)
@@ -73,7 +76,10 @@
 				 (clj-refactor-mode 1)))
 
 (use-package clj-refactor :ensure
-	:defer t)
+	:defer t
+	:commands (clojure-mode-hook
+             cider-repl-mode-hook)
+	:diminish clj-refactor-mode)
 
 (use-package cider :ensure
   :commands (clojure-mode-hook
@@ -112,6 +118,7 @@
             (double-quote . "\"")))
 
 (use-package smartparens :ensure
+	:defer t
   :commands all-lisps
   :init
   (progn
@@ -172,6 +179,7 @@
   :diminish 'smartparens-mode)
 
 (use-package highlight-parentheses :ensure
+	:defer t
   :commands all-lisps
   :init
   (progn
@@ -181,6 +189,7 @@
   :diminish highlight-parentheses-mode)
 
 (use-package aggressive-indent :ensure
+	:defer t
   :commands all-lisps
   :init
   (progn
@@ -197,6 +206,7 @@
 
 
 (use-package markdown-mode :ensure
+	:defer t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
