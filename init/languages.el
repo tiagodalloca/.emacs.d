@@ -59,17 +59,21 @@
   (interactive)
   (cider-clear-repl-buffer nil t))
 
-(use-package clojure-mode
+(use-package clojure-mode 
   :config
-  (define-clojure-indent
-    (defroutes 'defun)
-    (GET 2)
-    (POST 2)
-    (PUT 2)
-    (DELETE 2)
-    (HEAD 2)
-    (ANY 2)
-    (context 2)))
+  (progn (define-clojure-indent
+					 (defroutes 'defun)
+					 (GET 2)
+					 (POST 2)
+					 (PUT 2)
+					 (DELETE 2)
+					 (HEAD 2)
+					 (ANY 2)
+					 (context 2))
+				 (clj-refactor-mode 1)))
+
+(use-package clj-refactor :ensure
+	:defer t)
 
 (use-package cider :ensure
   :commands (clojure-mode-hook
@@ -86,7 +90,7 @@
 
 (setq all-lisps
       '(clojure-mode-hook
-        emacs-lisp-mode-hook
+				emacs-lisp-mode-hook
         cider-repl-mode-hook
         lisp-interaction-mode-hook))
 

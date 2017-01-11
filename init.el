@@ -60,7 +60,8 @@ locate PACKAGE."
    (expand-file-name
     (concat "~/.emacs.d/" str))))
 
-(load-directory (from-emacsd "vendor/"))
+(add-to-list 'load-path
+						 (from-emacsd "vendor/"))
 
 (require 'use-package)
 
@@ -86,7 +87,7 @@ locate PACKAGE."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
 	 (quote
-		(aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
+		(adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
