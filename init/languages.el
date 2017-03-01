@@ -50,9 +50,8 @@
   :defer t)
 
 (use-package emmet-mode :ensure
-  :defer t)
-
-
+  :defer t
+	:commands (html-mode-hook css-mode-hook))
 
 ;; LISP IN GENERAL
 
