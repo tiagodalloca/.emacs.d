@@ -76,8 +76,10 @@
 
 (use-package clj-refactor :ensure
 	:defer t
-	:commands (clojure-mode-hook
-             cider-repl-mode-hook)
+	:commands (clojure-mode-hook)
+	:config
+	(progn 
+		(cljr-add-keybindings-with-prefix "C-x j r"))
 	:diminish clj-refactor-mode)
 
 (use-package cider :ensure
@@ -88,7 +90,7 @@
     (setq cider-popup-stacktraces nil)
     (setq nrepl-popup-stacktraces nil))
   :bind
-  (("C-x j r" . cider-refresh)
+  (("C-x j R" . cider-refresh)
    ("C-x j u" . cider-user-ns)
    ("C-x j c" . cider-repl-clear-buffer))
   :diminish cider-mode)

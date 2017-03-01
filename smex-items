@@ -1,18 +1,18 @@
 
 ;; ----- smex-history -----
 (
+ emacs-init-time
  package-install
  rename-file
  swiper-all
  counsel-git
- emacs-init-time
  cd
  5x5
 )
 
 ;; ----- smex-data -----
 (
- (emacs-init-time . 6)
+ (emacs-init-time . 7)
  (counsel-git . 1)
  (swiper-all . 2)
  (rename-file . 2)

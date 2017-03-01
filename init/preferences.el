@@ -18,7 +18,6 @@
 ;; (electric-indent-mode -1)
 
 ;; FONTS
-;; (set-default-font "UbuntoMono 12")
 (defun font-exists-p (font)
 	"check if font exists"
 	(if (null (x-list-fonts font))
@@ -28,8 +27,8 @@
 	(if (font-exists-p font)
 			(set-face-attribute 'default nil :font font)))
 
-(set-face-attribute 'default nil :font "Consolas-12")
-(set-font-if-exists "Ubuntu Mono-13")
+(set-face-attribute 'default nil :font "Monospace-12")
+(set-font-if-exists "Ubuntu Mono-12")
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)

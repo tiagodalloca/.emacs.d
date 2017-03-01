@@ -5,9 +5,10 @@
 
 (use-package darktooth-theme :ensure
 	:config
-	(progn
-		(load-theme 'darktooth-theme t t)
-		(enable-theme 'darktooth-theme)))
+	(progn 
+		(load-theme 'darktooth t t)
+		(enable-theme 'darktooth)
+		(darktooth-modeline)))
 
 ;; (use-package ample-theme :ensure
 ;; 	:config

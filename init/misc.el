@@ -1,10 +1,6 @@
 ;; Use smex to handle M-x
-;; (use-package smex
-;;   :config
-;;   ;; Change path for ~/.smex-items
-;;   (progn
-;;     (setq-default smex-save-file (expand-file-name ".smex-items" user-emacs-directory))
-;;     (global-set-key [remap execute-extended-command] 'smex)))
+(use-package smex :ensure
+	:defer t)
 
 (use-package counsel :ensure
   :defer t)
