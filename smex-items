@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- emacs-init-time
- package-install
+ clojure-mode
+ python-mode
  rename-file
- swiper-all
- counsel-git
- cd
- 5x5
+ rename-buffer
+ lisp-mode
+ css-mode
+ html-mode
 )
 
 ;; ----- smex-data -----
@@ -15,6 +15,20 @@
  (emacs-init-time . 7)
  (counsel-git . 1)
  (swiper-all . 2)
- (rename-file . 2)
- (package-install . 1)
+ (rename-file . 4)
+ (package-install . 2)
+ (dired . 1)
+ (dired-next-line . 1)
+ (xml-mode . 1)
+ (emmet-mode . 1)
+ (load-theme . 1)
+ (eval-expression . 1)
+ (matlab-mode . 1)
+ (html-mode . 3)
+ (css-mode . 1)
+ (clojure-mode . 3)
+ (lisp-mode . 1)
+ (cider-eval-file . 2)
+ (rename-buffer . 1)
+ (python-mode . 1)
 )

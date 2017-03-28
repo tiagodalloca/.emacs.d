@@ -51,7 +51,13 @@
 
 (use-package emmet-mode :ensure
   :defer t
-	:commands (html-mode-hook css-mode-hook))
+	:commands (html-mode-hook css-mode-hook)
+	:bind
+	(:keymap emmet-mode-keymap
+					 ("C-." . emmet-expand-line)))
+
+(use-package sass-mode :ensure
+	:defer t)
 
 ;; LISP IN GENERAL
 
