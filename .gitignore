@@ -48,3 +48,4 @@ site-lisp/package/
 /projectile-bookmarks.eld
 /anaconda-mode/
 *.cache
+smex-items
