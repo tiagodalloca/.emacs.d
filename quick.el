@@ -23,7 +23,6 @@
 (setq package-enable-at-startup nil)
 
 (load-file (from-emacsd "init/languages.el"))
-(load-file (from-emacsd "init/add-path.el"))
 (load-file (from-emacsd "init/themes.el"))
 
 ;; NO WELCOME SCREEN
