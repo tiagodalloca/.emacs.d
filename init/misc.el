@@ -67,9 +67,10 @@
   :defer t
   :commands (dired-mode
              help-mode
-             projectile-mode)
+             projectile-mode)	
   :init
-  (projectile-global-mode)
+  (progn (projectile-global-mode)
+				 (setq projectile-indexing-method 'alien))
   :diminish 'projectile-mode)
 
 

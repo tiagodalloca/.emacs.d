@@ -81,3 +81,4 @@
 (global-set-key [f5] (lambda ()
                        (interactive)
                        (revert-buffer nil t)))
+
