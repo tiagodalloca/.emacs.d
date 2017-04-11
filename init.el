@@ -89,11 +89,13 @@ locate PACKAGE."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
 	 (quote
-		("6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "3c98d13ae2fc7aa59f05c494e8a15664ff5fe5db5256663a907272869c4130dd" "71182be392aa922f3c05e70087a40805ef2d969b4f8f965dfc0fc3c2f5df6168" "5436e5df71047d1fdd1079afa8341a442b1e26dd68b35b7d3c5ef8bd222057d1" default)))
+		("227edf860687e6dfd079dc5c629cbfb5c37d0b42a3441f5c50873ba11ec8dfd2" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "3c98d13ae2fc7aa59f05c494e8a15664ff5fe5db5256663a907272869c4130dd" "71182be392aa922f3c05e70087a40805ef2d969b4f8f965dfc0fc3c2f5df6168" "5436e5df71047d1fdd1079afa8341a442b1e26dd68b35b7d3c5ef8bd222057d1" default)))
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
 	 (quote
-		(sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
+		(sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme)))
+ '(pos-tip-background-color "#36473A")
+ '(pos-tip-foreground-color "#FFFFC8"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

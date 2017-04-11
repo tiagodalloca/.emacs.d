@@ -1,34 +1,41 @@
 
 ;; ----- smex-history -----
 (
- clojure-mode
- python-mode
+ emacs-init-time
+ js-mode
+ vc-revert
+ uncomment-region
+ javascript-mode
+ smartparens-mode
  rename-file
- rename-buffer
- lisp-mode
- css-mode
- html-mode
 )
 
 ;; ----- smex-data -----
 (
- (emacs-init-time . 7)
+ (emacs-init-time . 11)
  (counsel-git . 1)
  (swiper-all . 2)
- (rename-file . 4)
+ (rename-file . 6)
  (package-install . 2)
  (dired . 1)
  (dired-next-line . 1)
  (xml-mode . 1)
  (emmet-mode . 1)
- (load-theme . 1)
+ (load-theme . 7)
  (eval-expression . 1)
  (matlab-mode . 1)
  (html-mode . 3)
  (css-mode . 1)
  (clojure-mode . 3)
  (lisp-mode . 1)
- (cider-eval-file . 2)
+ (cider-eval-file . 7)
  (rename-buffer . 1)
  (python-mode . 1)
+ (set-input-method . 2)
+ (list-input-methods . 1)
+ (smartparens-mode . 3)
+ (javascript-mode . 2)
+ (uncomment-region . 1)
+ (vc-revert . 2)
+ (js-mode . 1)
 )
