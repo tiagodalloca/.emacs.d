@@ -78,7 +78,7 @@
 					 (HEAD 2)
 					 (ANY 2)
 					 (context 2))
-				 (clj-refactor-mode 1)))
+				 (clj-refactor-mode)))
 
 (use-package clj-refactor :ensure
 	:defer t
