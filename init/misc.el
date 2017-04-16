@@ -40,27 +40,17 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "")
     (setq ivy-height 10)
-    ;; (use-package counsel-projectile
-    ;;   :defer t
-    ;;   :init
-    ;;   (counsel-projectile-on))
     (eval-after-load 'counsel-projectile
-      '(counsel-projectile-on))
-    ;; (use-package projectile :ensure
-    ;;   :defer t
-    ;;   :config
-    ;;   (setq projectile-completion-system 'ivy))))
-    ))
-
+      '(counsel-projectile-on))))
 
 (use-package flycheck :ensure
   :defer t
-  :config
+  :init
   (add-hook 'prog-mode-hook #'flycheck-mode)
   :diminish flycheck-mode)
 
 (use-package multiple-cursors :ensure
-  :config
+  :init
   (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 
 (use-package projectile :ensure
@@ -78,18 +68,6 @@
   :config
   (powerline-default-theme))
 
-; (when (maybe-require-package 'smart-mode-line)
-;   (when (maybe-require-package 'smart-mode-line-powerline-theme)
-;     (setq powerline-arrow-shape 'curve)
-;     (setq sml/theme 'powerline)
-;     (setq sml/no-confirm-load-theme t)
-;     (sml/setup)))
-
-; (add-to-list 'load-path "~/.emacs.d/emacs-powerline/")
-; (require 'powerline)
-; (require 'cl)
-; (setq powerline-arrow-shape 'arrow14)
-
 (defun append-exec-path ()
   "Append projectiles directories to 'exec-path'."
   (when (functionp 'projectile-get-project-directories)
@@ -99,7 +77,7 @@
 
 (use-package company :ensure
   :defer t
-  :config
+  :init
   (progn
     (add-hook 'after-init-hook 'global-company-mode)
     (setq company-dabbrev-downcase 0)
@@ -115,7 +93,7 @@
 	(:map
 	 yas-minor-mode-map
 	 ("C-c <tab>" . company-yasnippet))
-	:config
+	:init
 	(yas-global-mode 1)
 	:diminish 'yas-minor-mode)
 

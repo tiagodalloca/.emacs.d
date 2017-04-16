@@ -3,19 +3,9 @@
 
 ;;TABS
 
-(defun my-generate-tab-stops (&optional width max)
-  "Return a sequence suitable for `tab-stop-list'."
-  (let* ((max-column (or max 200))
-         (tab-width (or width tab-width))
-         (count (/ max-column tab-width)))
-    (number-sequence tab-width (* tab-width count) tab-width)))
-
-(setq-default indent-tabs-mode t)
-(setq-default tab-width 2)
-(setq-default c-basic-offset 2)
-;; (setq tab-stop-list (my-generate-tab-stops))
-;; (global-set-key (kbd "<tab>") 'tab-to-tab-stop)
-;; (electric-indent-mode -1)
+(setq-default tab-width 2
+							c-basic-offset 2
+							indent-tabs-mode t)
 
 ;; FONTS
 (defun font-exists-p (font)
@@ -43,7 +33,7 @@
 
 ;; HIGHLIGHT CURRENT LINE
 (use-package hl-line
-  :config
+  :init
   (progn
     (global-hl-line-mode 1))
   :diminish 'highlight-parentheses-mode)

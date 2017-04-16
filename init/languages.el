@@ -27,20 +27,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-(use-package arduino-mode :ensure
-  :defer t
-  :init
-  (progn
-    (setq auto-mode-alist (cons '("\\.\\(pde\\|ino\\)$" . arduino-mode) auto-mode-alist))
-    (autoload 'arduino-mode "arduino-mode" "Arduino editing mode." t)
-    (eval-after-load 'irony
-      '(progn
-         (add-to-list 'irony-supported-major-modes 'arduino-mode)
-         (add-to-list 'irony-lang-compile-option-alist '(arduino-mode . "c++"))
-         ;; Turn-on irony-mode on arduino-mode (on .ino file).
-         (add-hook 'arduino-mode-hook 'irony-mode)))))
-
-
 ;; WEB
 
 (use-package js2-mode :ensure
@@ -51,8 +37,8 @@
 
 (use-package emmet-mode :ensure
   :defer t
-	:commands (html-mode-hook css-mode-hook)
-	:bind
+	:commands (html-mode-hook css-mode-bind)
+	:hook
 	(:keymap emmet-mode-keymap
 					 ("C-." . emmet-expand-line)))
 
