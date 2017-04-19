@@ -18,7 +18,8 @@
 			(set-face-attribute 'default nil :font font)))
 
 (set-face-attribute 'default nil :font "Monospace-12")
-(set-font-if-exists "Ubuntu Mono-12")
+(set-font-if-exists "Consolas-13")
+(set-font-if-exists "Ubuntu Mono-13")
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
