@@ -38,8 +38,8 @@
 (use-package emmet-mode :ensure
   :defer t
 	:commands (html-mode-hook css-mode-bind)
-	:hook
-	(:keymap emmet-mode-keymap
+	:bind
+	(:map emmet-mode-keymap
 					 ("C-." . emmet-expand-line)))
 
 (use-package sass-mode :ensure
@@ -64,7 +64,7 @@
 					 (HEAD 2)
 					 (ANY 2)
 					 (context 2))
-				 (clj-refactor-mode)))
+				 (clj-refactor-mode 1)))
 
 (use-package clj-refactor :ensure
 	:defer t
