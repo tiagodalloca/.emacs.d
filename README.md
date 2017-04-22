@@ -6,11 +6,13 @@ Initially, I was thinking of making this a private repository. But why not to ma
 
 ## Features
 
-- powerline
-- **monokai** theme
-- optmized for **windows**
-- for **clojure** development
-- **c/c++** enviroment
-- Consolas font
+- Powerline
+- Excellent **dark theme dartooth**
+- Tested on both **Linux and Windows**
+- For **clojure** development
+- **C/C++** enviroment
+- `use-package` for describing packages dependencies
+- **Fast startup time**
+- **Ubuntu Mono or Consolas** font (depending on availability)
 - Line numbers
 - Highlight current line
