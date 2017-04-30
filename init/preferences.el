@@ -20,7 +20,7 @@
 (defun load-font () 
 	(set-face-attribute 'default nil :font "Monospace-12")
 	(set-font-if-exists "Consolas-13")
-	(set-font-if-exists "Monaco-11"))
+	(set-font-if-exists "Inconsolata-13"))
 
 (when (display-graphic-p)
 	(load-font))
