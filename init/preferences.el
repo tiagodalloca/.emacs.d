@@ -15,9 +15,9 @@
 (defun set-font-if-exists (font)
 	"set font if it exists"
 	(if (font-exists-p font)
-			(set-face-attribute 'default nil :font font)))
+			(set-face-attribute 'default (selected-frame) :font font)))
 
-(when window-system
+(when (display-graphic-p)
 	(set-face-attribute 'default nil :font "Monospace-12")
 	(set-font-if-exists "Consolas-13")
 	(set-font-if-exists "Ubuntu Mono-13"))
@@ -42,8 +42,12 @@
 
 ;; MAXIMIZED SCREEN
 (require 'maxframe)
-(when window-system
-	(run-with-idle-timer 0.1 nil 'maximize-frame))
+(defun fullscreen (&optional f)
+	(interactive)
+	(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+												 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+	(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+												 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
 
 ;; TEMP FILES LOCATION
 ;; Save all tempfiles in $TMPDIR/emacs$UID/
@@ -75,14 +79,26 @@
                        (interactive)
                        (revert-buffer nil t)))
 
+(defun fullscreen (&optional f)
+	(interactive)
+	(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+												 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+	(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+												 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
 
-(defun px-raise-frame-and-give-focus (_)
-  (when window-system
-    (run-with-idle-timer
-		 0.1 nil (lambda ()
-							 (raise-frame)
-							 (x-focus-frame (selected-frame))
-							 (maximize-frame (selected-frame))
-							 (print "Focused")))))
+(defun on-client-connect (&optional frame)
+	(when frame
+		(run-with-idle-timer
+		 0.01 nil (lambda (f)
+								(condition-case nil
+										(progn (x-focus-frame f)
+													 (raise-frame f)
+													 (maximize-frame)
+													 (fullscreen))
+									(error nil)))
+		 frame)
+		(set-face-attribute 'default nil :font "Monospace-12")
+		(set-font-if-exists "Consolas-13")
+		(set-font-if-exists "Ubuntu Mono-13")))
 
-(add-hook 'after-make-frame-functions #'px-raise-frame-and-give-focus)
+(add-hook 'after-make-frame-functions #'on-client-connect)
