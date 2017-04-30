@@ -17,10 +17,13 @@
 	(if (font-exists-p font)
 			(set-face-attribute 'default (selected-frame) :font font)))
 
-(when (display-graphic-p)
+(defun load-font () 
 	(set-face-attribute 'default nil :font "Monospace-12")
 	(set-font-if-exists "Consolas-13")
-	(set-font-if-exists "Ubuntu Mono-13"))
+	(set-font-if-exists "Monaco-11"))
+
+(when (display-graphic-p)
+	(load-font))
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -87,18 +90,15 @@
 												 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
 
 (defun on-client-connect (&optional frame)
-	(when frame
+	(select-frame frame)
+	(when (and frame (display-graphic-p))
 		(run-with-idle-timer
 		 0.01 nil (lambda (f)
-								(condition-case nil
-										(progn (x-focus-frame f)
-													 (raise-frame f)
-													 (maximize-frame)
-													 (fullscreen))
-									(error nil)))
+								(progn (x-focus-frame f)
+											 (raise-frame f)
+											 (maximize-frame)
+											 (fullscreen)))
 		 frame)
-		(set-face-attribute 'default nil :font "Monospace-12")
-		(set-font-if-exists "Consolas-13")
-		(set-font-if-exists "Ubuntu Mono-13")))
+		(load-font)))
 
 (add-hook 'after-make-frame-functions #'on-client-connect)
