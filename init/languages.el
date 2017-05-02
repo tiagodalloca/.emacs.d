@@ -1,4 +1,4 @@
-﻿;; C/CPP
+;; C/CPP
 
 ;; (use-package irony :ensure
 ;; 	:defer t
@@ -86,6 +86,25 @@
    ("C-x j u" . cider-user-ns)
    ("C-x j c" . cider-repl-clear-buffer))
   :diminish cider-mode)
+
+(font-lock-add-keywords
+ 'clojure-mode `(("(\\(fn\\>\\)"
+									(0 (progn (compose-region (match-beginning 1)
+																						(match-end 1) "λ")
+														nil)))))
+
+
+(font-lock-add-keywords
+ 'lisp-mode `(("(\\(lambda\\>\\)"
+							 (0 (progn (compose-region (match-beginning 1)
+																				 (match-end 1) "λ")
+												 nil)))))
+
+(font-lock-add-keywords
+ 'emacs-lisp-mode `(("(\\(lambda\\>\\)"
+										 (0 (progn (compose-region (match-beginning 1)
+																							 (match-end 1) "λ")
+															 nil)))))
 
 (setq all-lisps
       '(clojure-mode-hook

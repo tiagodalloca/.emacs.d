@@ -79,7 +79,7 @@
 
 ;;BINDININGS
 (global-set-key [f5] (lambda ()
-                       (interactive)
+											 (interactive)
                        (revert-buffer nil t)))
 
 (defun fullscreen (&optional f)
@@ -93,11 +93,10 @@
 	(select-frame frame)
 	(when (and frame (display-graphic-p))
 		(run-with-idle-timer
-		 0.01 nil (lambda (f)
-								(progn (x-focus-frame f)
-											 (raise-frame f)
-											 (maximize-frame)
-											 (fullscreen)))
+		 0.01 nil (lambda (f) (progn (x-focus-frame f)
+														(raise-frame f)
+														(maximize-frame)
+														(fullscreen)))
 		 frame)
 		(load-font)))
 
