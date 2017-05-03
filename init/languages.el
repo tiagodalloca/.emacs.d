@@ -55,7 +55,8 @@
 (use-package clojure-mode
 	:defer t
   :config
-  (progn (define-clojure-indent
+  (progn (require 'clojure-mode-extra-font-locking)
+				 (define-clojure-indent
 					 (defroutes 'defun)
 					 (GET 2)
 					 (POST 2)
@@ -86,25 +87,6 @@
    ("C-x j u" . cider-user-ns)
    ("C-x j c" . cider-repl-clear-buffer))
   :diminish cider-mode)
-
-(font-lock-add-keywords
- 'clojure-mode `(("(\\(fn\\>\\)"
-									(0 (progn (compose-region (match-beginning 1)
-																						(match-end 1) "λ")
-														nil)))))
-
-
-(font-lock-add-keywords
- 'lisp-mode `(("(\\(lambda\\>\\)"
-							 (0 (progn (compose-region (match-beginning 1)
-																				 (match-end 1) "λ")
-												 nil)))))
-
-(font-lock-add-keywords
- 'emacs-lisp-mode `(("(\\(lambda\\>\\)"
-										 (0 (progn (compose-region (match-beginning 1)
-																							 (match-end 1) "λ")
-															 nil)))))
 
 (setq all-lisps
       '(clojure-mode-hook
@@ -227,3 +209,26 @@
 
 ;; ascii art:
 ;; http://patorjk.com/software/taag/
+
+
+;; ???
+
+
+(defun my-pretty-chars ()
+  "make some word or string show as pretty Unicode symbols"
+  (setq prettify-symbols-alist
+        '(("lambda" . 955)
+					("fn"  . 955)
+					("->"  . 10230)
+					("->>" . 10233)
+					("=>"  . 10233))))
+
+(global-prettify-symbols-mode t)
+(add-hook 'clojure-mode-hook 'my-pretty-chars)
+(add-hook 'lisp-mode-hook 'my-pretty-chars)
+(add-hook 'elisp-mode-hook 'my-pretty-chars)
+(add-hook 'lisp-interaction-mode-hook 'my-pretty-chars)
+(add-hook 'haskell-mode-hook 'my-pretty-chars)
+(add-hook 'javascript-mode-hook 'my-pretty-chars)
+(add-hook 'shen-mode-hook 'my-pretty-chars)
+(add-hook 'tex-mode-hook 'my-pretty-chars)

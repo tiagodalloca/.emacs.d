@@ -8,7 +8,7 @@ Initially, I was thinking of making this a private repository. But why not to ma
 
 - **Runs smoothly when used by `emacsclient`**
 - Tested **with and without graphics display**
-- Excellent **dark theme: Dartooth**
+- Excellent **dark theme: Gruvbox**
 - Tested on both **Linux and Windows**
 - Settled **Clojure** development enviroment
 - `use-package` for describing packages dependencies
