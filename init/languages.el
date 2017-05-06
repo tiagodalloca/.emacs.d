@@ -219,9 +219,9 @@
   (setq prettify-symbols-alist
         '(("lambda" . 955)
 					("fn"  . 955)
-					("->"  . 10230)
-					("->>" . 10233)
-					("=>"  . 10233))))
+					("->"  . 8594)
+					("->>" . 8658)
+					("=>"  . 8658))))
 
 (global-prettify-symbols-mode t)
 (add-hook 'clojure-mode-hook 'my-pretty-chars)
