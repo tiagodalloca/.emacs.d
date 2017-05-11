@@ -1,9 +1,7 @@
 ;; Use smex to handle M-x
-(use-package smex :ensure
-	:defer t)
+(use-package smex :ensure)
 
-(use-package counsel :ensure
-  :defer t)
+(use-package counsel :ensure)
 
 (use-package swiper :ensure
   :defer t)
@@ -11,8 +9,7 @@
 (use-package ag :ensure
   :defer t)
 
-(use-package counsel-projectile :ensure
-  :defer t)
+(use-package counsel-projectile :ensure)
 
 (use-package ivy :ensure
   :diminish (ivy-mode . "")
@@ -53,8 +50,7 @@
   :init
   (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click))
 
-(use-package projectile :ensure
-  :defer t
+(use-package projectile :ensure 
   :commands (dired-mode
              help-mode
              projectile-mode)	
