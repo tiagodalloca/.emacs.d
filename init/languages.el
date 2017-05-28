@@ -32,18 +32,34 @@
 (use-package js2-mode :ensure
   :defer t)
 
+(use-package coffee-mode :ensure
+	:defer t)
+
 (use-package php-mode :ensure
   :defer t)
 
 (use-package emmet-mode :ensure
-  :defer t
-	:commands (html-mode-hook css-mode-bind)
+  :defer t 
 	:bind
 	(:map emmet-mode-keymap
-					 ("C-." . emmet-expand-line)))
+				("C-." . emmet-expand-line))
+	:init
+	(progn (add-hook 'html-mode-hook #'emmet-mode)
+				 (add-hook 'css-mode-bind #'emmet-mode)))
 
 (use-package sass-mode :ensure
 	:defer t)
+
+(use-package ruby-mode
+	:init
+	(setq ruby-deep-indent-paren nil))
+
+(use-package inf-ruby :ensure
+	:defer t)
+
+(use-package robe :ensure
+	:defer t
+	:commands (ruby-mode-hook))
 
 ;; LISP IN GENERAL
 
@@ -112,13 +128,10 @@
             (double-quote . "\"")))
 
 (use-package smartparens :ensure
-	:defer t
-  :commands all-lisps
+	:defer t 
   :init
   (progn
-    (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
-    (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
-    (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+		(smartparens-global-strict-mode)
     (unbind-key "\t"))
   :bind
   (:map smartparens-mode-map
@@ -172,29 +185,22 @@
   (sp-pair "`" nil :actions :rem)
   :diminish 'smartparens-mode)
 
+(define-globalized-minor-mode
+	global-highlight-parentheses-mode
+	highlight-parentheses-mode
+  (lambda () (highlight-parentheses-mode 1)))
+
 (use-package highlight-parentheses :ensure
-	:defer t
-  :commands all-lisps
-  :init
-  (progn
-    (add-hook 'clojure-mode-hook #'highlight-parentheses-mode)
-    (add-hook 'emacs-lisp-mode-hook #'highlight-parentheses-mode)
-    (add-hook 'cider-repl-mode-hook #'highlight-parentheses-mode))
-  :diminish highlight-parentheses-mode)
+	:init (global-highlight-parentheses-mode)
+  :diminish global-highlight-parentheses-mode)
 
 (use-package aggressive-indent :ensure
-	:defer t
-  :commands all-lisps
+	:defer t 
   :init
-  (progn
-    (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-    (add-hook 'cider-repl-mode-hook #'aggressive-indent-mode))
+  (aggressive-indent-global-mode)
   :diminish aggressive-indent-mode)
 
 (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
-
-
 
 ;; MARKDOWN
 
