@@ -38,6 +38,19 @@
 (use-package php-mode :ensure
   :defer t)
 
+(use-package web-mode :ensure
+	:defer t
+	:init
+	(progn (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+				 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+				 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+				 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+				 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+				 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+				 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode)))
+	:config 
+	(progn (setq web-mode-markup-indent-offset 2)))
+
 (use-package emmet-mode :ensure
   :defer t 
 	:bind
@@ -45,7 +58,10 @@
 				("C-." . emmet-expand-line))
 	:init
 	(progn (add-hook 'html-mode-hook #'emmet-mode)
-				 (add-hook 'css-mode-bind #'emmet-mode)))
+				 (add-hook 'css-mode-bind #'emmet-mode)
+				 (add-hook 'html-mode-hook #'emmet-mode)
+				 (add-hook 'css-mode-bind #'emmet-mode)
+				 (add-hook 'web-mode-hook #'emmet-mode)))
 
 (use-package sass-mode :ensure
 	:defer t)
@@ -225,9 +241,10 @@
   (setq prettify-symbols-alist
         '(("lambda" . 955)
 					("fn"  . 955)
-					("->"  . 8594)
-					("->>" . 8658)
-					("=>"  . 8658))))
+					;; ("->"  . 8594)
+					;; ("->>" . 8658)
+					;; ("=>"  . 8658)
+					)))
 
 (global-prettify-symbols-mode t)
 (add-hook 'clojure-mode-hook 'my-pretty-chars)
