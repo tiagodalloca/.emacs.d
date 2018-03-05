@@ -38,7 +38,8 @@
     (setq ivy-count-format "")
     (setq ivy-height 10)
     (eval-after-load 'counsel-projectile
-      '(counsel-projectile-on))))
+      '(progn
+				 (counsel-projectile-mode)))))
 
 (use-package flycheck :ensure
   :defer t
