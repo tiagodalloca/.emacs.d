@@ -99,11 +99,12 @@
 					 (context 2))
 				 (clj-refactor-mode 1)))
 
+(global-unset-key (kbd "C-x j"))
 (use-package clj-refactor :ensure
 	:defer t
 	:commands (clojure-mode-hook)
 	:config
-	(progn 
+	(progn
 		(cljr-add-keybindings-with-prefix "C-x j r"))
 	:diminish clj-refactor-mode)
 
