@@ -1,8 +1,8 @@
 # emacs.d
 
-This is my configuration for Emacs!
+This is my emacs config!
 
-Initially, I was thinking of making this a private repository. But why not to make it public, so anyone can download it?
+Initially I was thinking of making this a private repository. But why not make it public so anyone can download it?
 
 ## Features
 
@@ -10,7 +10,7 @@ Initially, I was thinking of making this a private repository. But why not to ma
 - Tested **with and without graphics display**
 - Excellent **dark theme: Gruvbox**
 - Tested on both **Linux and Windows**
-- Settled **Clojure** development enviroment
+- Configured **Clojure** development enviroment
 - `use-package` for describing packages dependencies
 - **Fast startup time**
 - **Inconsolata or Consolas** font (depending on availability, default regular system's monospaced font)

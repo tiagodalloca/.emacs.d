@@ -77,6 +77,14 @@
 	:defer t
 	:commands (ruby-mode-hook))
 
+;; PYTHON
+
+(use-package elpy :ensure
+	:init (progn (elpy-enable)
+							 (setq python-shell-interpreter "python3"
+										 python-shell-interpreter-args "-i"))
+  :defer t)
+
 ;; LISP IN GENERAL
 
 
