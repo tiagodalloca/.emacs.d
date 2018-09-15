@@ -2,7 +2,7 @@
 
 This is my emacs config!
 
-Initially I was thinking of making this a private repository. But why not make it public so anyone can download it?
+Initially I was thinking of making this a private repository. But why not make it public so anyone can use it?
 
 ## Features
 

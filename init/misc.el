@@ -39,7 +39,8 @@
     (setq ivy-height 10)
     (eval-after-load 'counsel-projectile
       '(progn
-				 (counsel-projectile-mode)))))
+				 (counsel-projectile-mode)
+				 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)))))
 
 (use-package flycheck :ensure
   :defer t
