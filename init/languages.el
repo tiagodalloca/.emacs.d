@@ -29,8 +29,10 @@
 
 ;; WEB
 
-(use-package js2-mode :ensure
-  :defer t)
+;; (use-package js2-mode
+;;   :ensure t
+;;   :pin gnu
+;;   :defer t)
 
 (use-package coffee-mode :ensure
 	:defer t)
