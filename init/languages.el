@@ -93,7 +93,9 @@
   (cider-clear-repl-buffer nil t))
 
 (use-package clojure-mode
-	:defer t
+  :pin melpa-stable
+  :ensure t
+  :defer t
   :config
   (progn (require 'clojure-mode-extra-font-locking)
 				 (define-clojure-indent
@@ -108,7 +110,7 @@
 				 (clj-refactor-mode 1)))
 
 (global-unset-key (kbd "C-x j"))
-(use-package clj-refactor :ensure
+(use-package clj-refactor :ensure t :pin melpa-stable
 	:defer t
 	:commands (clojure-mode-hook)
 	:config
