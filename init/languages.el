@@ -1,29 +1,29 @@
 ;; C/CPP
 
-;; (use-package irony :ensure
-;; 	:defer t
-;;   :commands (c++-mode-hook
-;;              c-mode-hook
-;;              objc-mode-hook)
-;;   :init
-;;   (progn
-;;     (add-hook 'c++-mode-hook 'irony-mode)
-;;     (add-hook 'c-mode-hook 'irony-mode)
-;;     (add-hook 'objc-mode-hook 'irony-mode)
-;;     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-;;     (setq w32-pipe-read-delay 0)))
+(use-package irony :ensure
+	:defer t
+  :commands (c++-mode-hook
+             c-mode-hook
+             objc-mode-hook)
+  :init
+  (progn
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    (setq w32-pipe-read-delay 0)))
 
-;; (use-package company-irony :ensure
-;; 	:defer t
-;;   :commands irony-mode-hook
-;;   :init
-;;   (eval-after-load 'company
-;;     '(add-to-list 'company-backends 'company-irony)))
+(use-package company-irony :ensure
+	:defer t
+  :commands irony-mode-hook
+  :init
+  (eval-after-load 'company
+    '(add-to-list 'company-backends 'company-irony)))
 
-;; (use-package flycheck-irony :ensure
-;;   :commands irony-mode-hook
-;;   :init
-;;   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+(use-package flycheck-irony :ensure
+  :commands irony-mode-hook
+  :init
+  (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 ;; (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -160,8 +160,7 @@
 	:defer t 
   :init
   (progn
-		(smartparens-global-strict-mode)
-    (unbind-key "\t"))
+		(smartparens-global-strict-mode))
   :bind
   (:map smartparens-mode-map
         ("C-M-a" . sp-beginning-of-sexp)
@@ -169,8 +168,9 @@
 
         ("C-M-j"   . sp-down-sexp)
         ("C-M-i"   . sp-backward-up-sexp)
-        ("C-j" . sp-backward-down-sexp)
-        ("C-i" . sp-up-sexp)
+        ("C-S-j" . sp-backward-down-sexp)
+        ("C-S-i" . sp-up-sexp)
+
 
         ("C-M-f" . sp-forward-sexp)
         ("C-M-b" . sp-backward-sexp)
@@ -241,6 +241,11 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "C:\\MMDw\\bin\\multimarkdown"))
+
+;; HASKELL
+
+(use-package haskell-mode :ensure :defer t
+	:commands (haskell-mode))
 
 ;; ascii art:
 ;; http://patorjk.com/software/taag/

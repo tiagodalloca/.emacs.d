@@ -81,9 +81,11 @@
     (setq company-dabbrev-downcase 0)
     (setq company-idle-delay 0)
     (global-company-mode)
-    (diminish 'company-mode))  
+    (diminish 'company-mode)
+		;; (global-unset-key (kbd "<tab>"))
+		(global-unset-key (kbd "TAB")))
   :bind
-  (("S-SPC" . company-complete)))
+  (("TAB" . company-complete)))
 
 (use-package yasnippet :ensure
 	:defer t
