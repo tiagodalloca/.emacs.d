@@ -245,7 +245,14 @@
 ;; HASKELL
 
 (use-package haskell-mode :ensure :defer t
-	:commands (haskell-mode))
+  :commands (haskell-mode)
+  :init
+  (progn
+    (aggressive-indent-mode 0)))
+
+;; RISCV
+
+(require 'riscv-mode)
 
 ;; ascii art:
 ;; http://patorjk.com/software/taag/

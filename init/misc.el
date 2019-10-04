@@ -104,3 +104,17 @@
   :defer t
   :diminish 'abbrev-mode)
 
+(setq browse-url-generic-program (executable-find "firefox"))
+
+(defun open-koala ()
+	"Hey koala."
+	(interactive)
+	(browse-url-generic "https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fmomvoyage.hilton.com%2Fwp-content%2Fuploads%2F2013%2F05%2FKoala-Mother-and-Joey.jpg&f=1&nofb=1"))
+
+(defun open-panda ()
+	"Hey koala."
+	(interactive)
+	(browse-url-generic "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fsearchengineland.com%2Ffigz%2Fwp-content%2Fseloads%2F2014%2F08%2Fpanda-teeth-ss-1920.jpg&f=1&nofb=1"))
+
+(global-set-key (kbd "C-S-M-z C-S-M-z 1") 'open-koala)
+(global-set-key (kbd "C-S-M-z C-S-M-z 2") 'open-panda)
