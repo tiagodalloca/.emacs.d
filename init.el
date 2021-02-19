@@ -102,12 +102,10 @@ locate PACKAGE."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-	 (quote
-		("c63a789fa2c6597da31f73d62b8e7fad52c9420784e6ec34701ae8e8f00071f6" "fd24b2c570dbd976e17a63ba515967600acb7d2f9390793859cb82f6a2d5dacd" "82fce2cada016f736dbcef237780516063a17c2436d1ee7f42e395e38a15793b" "858a353233c58b69dbe3a06087fc08905df2d8755a0921ad4c407865f17ab52f" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "3c98d13ae2fc7aa59f05c494e8a15664ff5fe5db5256663a907272869c4130dd" "71182be392aa922f3c05e70087a40805ef2d969b4f8f965dfc0fc3c2f5df6168" "5436e5df71047d1fdd1079afa8341a442b1e26dd68b35b7d3c5ef8bd222057d1" default)))
- '(initial-frame-alist (quote ((fullscreen . maximized))))
+	 '("c63a789fa2c6597da31f73d62b8e7fad52c9420784e6ec34701ae8e8f00071f6" "fd24b2c570dbd976e17a63ba515967600acb7d2f9390793859cb82f6a2d5dacd" "82fce2cada016f736dbcef237780516063a17c2436d1ee7f42e395e38a15793b" "858a353233c58b69dbe3a06087fc08905df2d8755a0921ad4c407865f17ab52f" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "3c98d13ae2fc7aa59f05c494e8a15664ff5fe5db5256663a907272869c4130dd" "71182be392aa922f3c05e70087a40805ef2d969b4f8f965dfc0fc3c2f5df6168" "5436e5df71047d1fdd1079afa8341a442b1e26dd68b35b7d3c5ef8bd222057d1" default))
+ '(initial-frame-alist '((fullscreen . maximized)))
  '(package-selected-packages
-	 (quote
-		(riscv-mode irony haskell-mode elpy coffee-mode robe inf-ruby monokai-theme darkokai-theme gruvbox-theme leuven-theme omnisharp smart-tabs-mode sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
+	 '(riscv-mode irony haskell-mode elpy coffee-mode robe inf-ruby monokai-theme darkokai-theme gruvbox-theme leuven-theme omnisharp smart-tabs-mode sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
