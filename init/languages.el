@@ -1,4 +1,4 @@
-;; C/CPP
+; C/CPP
 
 (use-package irony :ensure
 	:defer t
@@ -141,7 +141,7 @@
 
 (defmacro def-pairs (pairs)
   `(progn
-     ,@(loop for (key . val) in pairs
+     ,@(cl-loop for (key . val) in pairs
              collect
              `(defun ,(read (concat
                              "wrap-with-"
@@ -250,6 +250,15 @@
   (progn
     (aggressive-indent-mode 0)))
 
+;;TYPESCRIPT
+
+(use-package typescript-mode :ensure)
+
+(use-package tide :ensure :defer t
+	:after (typescript-mode company flycheck)
+	:hook ((typescript-mode . tide-setup)
+				 (typescript-mode . tide-hl-identifier-mode)))
+
 ;; RISCV
 
 (require 'riscv-mode)
@@ -280,3 +289,4 @@
 (add-hook 'javascript-mode-hook 'my-pretty-chars)
 (add-hook 'shen-mode-hook 'my-pretty-chars)
 (add-hook 'tex-mode-hook 'my-pretty-chars)
+(add-hook 'typescript-mode-hook 'my-pretty-chars)
