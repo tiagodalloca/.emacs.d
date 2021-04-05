@@ -21,10 +21,11 @@
 	(set-face-attribute 'default nil :font "Monospace-12")
 	(set-font-if-exists "Consolas-13")
 	(set-font-if-exists "Ubuntu Mono-14")
-	(when (and (window-system) (font-exists-p  "Fira Code"))
-		(progn (set-frame-font "Fira Code-14")
-					 (fira-code-mode 1)))
-	(set-font-if-exists "Fantasque Sans Mono-14"))
+	(when (and (window-system) (font-exists-p "Fira Code-12"))
+		(progn (set-frame-font "Fira Code-12")
+					 (use-package fira-code-mode
+						 :custom (fira-code-mode-disabled-ligatures '("[]" "x"))
+						 :hook prog-mode))))
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -167,3 +168,4 @@
 
 (when (display-graphic-p)
 	(load-font))
+
