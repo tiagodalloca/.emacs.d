@@ -21,11 +21,17 @@
 	(set-face-attribute 'default nil :font "Monospace-12")
 	(set-font-if-exists "Consolas-13")
 	(set-font-if-exists "Ubuntu Mono-14")
-	(when (and (window-system) (font-exists-p "Fira Code-12"))
-		(progn (set-frame-font "Fira Code-12")
-					 (use-package fira-code-mode
-						 :custom (fira-code-mode-disabled-ligatures '("[]" "x"))
-						 :hook prog-mode))))
+	(set-font-if-exists "Fira Code-12"))
+
+(require 'fira-code-mode)
+
+(add-hook 'prog-mode-hook
+					(lambda ()
+						(when (and (window-system) (font-exists-p "Fira Code-12"))
+							(progn
+								(setq fira-code-mode-disabled-ligatures '("[]" "x"))
+								(fira-code-mode)
+								(diminish 'fira-code-mode)))))
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -103,68 +109,6 @@
 		(load-font)))
 
 (add-hook 'after-make-frame-functions #'on-client-connect)
-
-
-;; FIRA CODE
-
-(defun fira-code-mode--make-alist (list)
-  "Generate prettify-symbols alist from LIST."
-  (let ((idx -1))
-    (mapcar
-     (lambda (s)
-       (setq idx (1+ idx))
-       (let* ((code (+ #Xe100 idx))
-							(width (string-width s))
-							(prefix ())
-							(suffix '(?\s (Br . Br)))
-							(n 1))
-				 (while (< n width)
-					 (setq prefix (append prefix '(?\s (Br . Bl))))
-					 (setq n (1+ n)))
-				 (cons s (append prefix suffix (list (decode-char 'ucs code))))))
-     list)))
-
-(defconst fira-code-mode--ligatures
-  '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\"
-    "{-" "[]" "::" ":::" ":=" "!!" "!=" "!==" "-}"
-    "--" "---" "-->" "->" "->>" "-<" "-<<" "-~"
-    "#{" "#[" "##" "###" "####" "#(" "#?" "#_" "#_("
-    ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*"
-    "/**" "/=" "/==" "/>" "//" "///" "&&" "||" "||="
-    "|=" "|>" "^=" "$>" "++" "+++" "+>" "=:=" "=="
-    "===" "==>" "=>" "=>>" "<=" "=<<" "=/=" ">-" ">="
-    ">=>" ">>" ">>-" ">>=" ">>>" "<*" "<*>" "<|" "<|>"
-    "<$" "<$>" "<!--" "<-" "<--" "<->" "<+" "<+>" "<="
-    "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
-    "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"
-    "x" ":" "+" "+" "*"))
-
-(defvar fira-code-mode--old-prettify-alist)
-
-(defun fira-code-mode--enable ()
-  "Enable Fira Code ligatures in current buffer."
-  (setq-local fira-code-mode--old-prettify-alist prettify-symbols-alist)
-  (setq-local prettify-symbols-alist (append (fira-code-mode--make-alist fira-code-mode--ligatures) fira-code-mode--old-prettify-alist))
-  (prettify-symbols-mode t))
-
-(defun fira-code-mode--disable ()
-  "Disable Fira Code ligatures in current buffer."
-  (setq-local prettify-symbols-alist fira-code-mode--old-prettify-alist)
-  (prettify-symbols-mode -1))
-
-(define-minor-mode fira-code-mode
-  "Fira Code ligatures minor mode"
-  :lighter " Fira Code"
-  (setq-local prettify-symbols-unprettify-at-point 'right-edge)
-  (if fira-code-mode
-      (fira-code-mode--enable)
-    (fira-code-mode--disable)))
-
-(defun fira-code-mode--setup ()
-  "Setup Fira Code Symbols"
-  (set-fontset-font t '(#Xe100 . #Xe16f) "Fira Code Symbol"))
-
-(provide 'fira-code-mode)
 
 (when (display-graphic-p)
 	(load-font))
