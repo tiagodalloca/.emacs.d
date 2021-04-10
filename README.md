@@ -13,7 +13,7 @@ Initially I was thinking of making this a private repository. But why not make i
 - Configured **Clojure** development enviroment
 - `use-package` for describing packages dependencies
 - **Fast startup time**
-- **Inconsolata or Consolas** font (depending on availability, default regular system's monospaced font)
+- **Fira Code** font (depending on availability, default regular system's monospaced font)
 - Powerline
 - Line numbers
 - Highlight current line
