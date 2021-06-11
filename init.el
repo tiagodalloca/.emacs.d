@@ -106,7 +106,20 @@ locate PACKAGE."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
 	 (quote
-		(twilight-bright-theme twilight-bright-thme lenlen-theme ample-light ample-light-theme solarized-theme typescript-mode riscv-mode irony haskell-mode elpy coffee-mode robe inf-ruby monokai-theme darkokai-theme gruvbox-theme leuven-theme omnisharp smart-tabs-mode sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme))))
+		(twilight-bright-theme twilight-bright-thme lenlen-theme ample-light ample-light-theme solarized-theme typescript-mode riscv-mode irony haskell-mode elpy coffee-mode robe inf-ruby monokai-theme darkokai-theme gruvbox-theme leuven-theme omnisharp smart-tabs-mode sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme)))
+ '(safe-local-variable-values
+	 (quote
+		((eval font-lock-add-keywords nil
+					 (\`
+						(((\,
+							 (concat "("
+											 (regexp-opt
+												(quote
+												 ("sp-do-move-op" "sp-do-move-cl" "sp-do-put-op" "sp-do-put-cl" "sp-do-del-op" "sp-do-del-cl"))
+												t)
+											 "\\_>"))
+							1
+							(quote font-lock-variable-name-face)))))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

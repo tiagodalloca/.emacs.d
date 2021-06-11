@@ -1,4 +1,4 @@
-; C/CPP
+;;;C/CPP
 
 (use-package irony :ensure
 	:defer t
@@ -157,10 +157,13 @@
             (double-quote . "\"")))
 
 (use-package smartparens :ensure
-	:defer t 
-  :init
-  (progn
-		(smartparens-global-strict-mode))
+	:defer t
+	:init
+	(progn (smartparens-global-mode)
+				 (set 'sp-escape-quotes-after-insert nil)
+				 (sp-with-modes '(clojure-mode emacs-lisp-mode)
+					 (sp-local-pair "'" nil :actions nil)
+					 (sp-local-pair "`" "'" :when '(sp-in-string-p sp-in-comment-p))))
   :bind
   (:map smartparens-mode-map
         ("C-M-a" . sp-beginning-of-sexp)
@@ -209,9 +212,6 @@
         ("C-c _"  . wrap-with-underscores)
         ("C-c `"  . wrap-with-back-quotes)
         ("\t"  . indent-region))
-  :config
-  (sp-pair "'" nil :actions :rem)
-  (sp-pair "`" nil :actions :rem)
   :diminish 'smartparens-mode)
 
 (define-globalized-minor-mode
