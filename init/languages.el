@@ -50,11 +50,11 @@
 				 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 				 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 				 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode)))
-	:config 
+	:config
 	(progn (setq web-mode-markup-indent-offset 2)))
 
 (use-package emmet-mode :ensure
-  :defer t 
+  :defer t
 	:bind
 	(:map emmet-mode-keymap
 				("C-." . emmet-expand-line))
@@ -257,10 +257,6 @@
 	:after (typescript-mode company flycheck)
 	:hook ((typescript-mode . tide-setup)
 				 (typescript-mode . tide-hl-identifier-mode)))
-
-;; RISCV
-
-(require 'riscv-mode)
 
 ;; ascii art:
 ;; http://patorjk.com/software/taag/
