@@ -161,7 +161,7 @@
 	:init
 	(progn (smartparens-global-mode)
 				 (set 'sp-escape-quotes-after-insert nil)
-				 (sp-with-modes '(clojure-mode emacs-lisp-mode)
+				 (sp-with-modes '(clojure-mode emacs-lisp-mode cider-repl-mode)
 					 (sp-local-pair "'" nil :actions nil)
 					 (sp-local-pair "`" "'" :when '(sp-in-string-p sp-in-comment-p))))
   :bind
