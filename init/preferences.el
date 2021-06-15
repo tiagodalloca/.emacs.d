@@ -25,9 +25,15 @@
 
 (require 'fira-code-mode)
 
+(defun is-not-windows-so? ()
+	"Am I running on windows?"
+	(not (string-match-p "Windows" (getenv "PATH"))))
+
 (add-hook 'prog-mode-hook
 					(lambda ()
-						(when (and (window-system) (font-exists-p "Fira Code-12"))
+						(when (and (window-system) 
+											 (font-exists-p "Fira Code-12")
+											 (is-not-windows-so?))
 							(progn
 								(setq fira-code-mode-disabled-ligatures '("[]" "x"))
 								(fira-code-mode)
