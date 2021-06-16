@@ -7,6 +7,10 @@
 (use-package gruvbox-theme :ensure t
   :config (load-theme 'gruvbox-light-soft t))
 
+;; (use-package gruvbox-theme :ensure t
+;;   :config (load-theme 'gruvbox t))
+
+
 ;; (use-package twilight-bright-theme :ensure t
 ;; 	:config (load-theme 'twilight-bright t))
 

@@ -113,3 +113,5 @@
 (when (display-graphic-p)
 	(load-font))
 
+(setq whitespace-style '(tabs trailing space-before-tab indentation empty space-after-tab tab-mark))
+(global-whitespace-mode)
