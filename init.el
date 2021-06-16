@@ -94,3 +94,4 @@ locate PACKAGE."
 (load-file (from-emacsd "init/preferences.el"))
 (load-file (from-emacsd "init/misc.el"))
 (load-file (from-emacsd "init/themes.el"))
+
