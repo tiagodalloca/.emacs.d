@@ -23,6 +23,9 @@
 	(set-font-if-exists "Ubuntu Mono-14")
 	(set-font-if-exists "Fira Code-12"))
 
+;; DON'T FORGET DO DOWNLOAD FIRA CODE FONT
+;; AND https://github.com/tonsky/FiraCode/files/412440/FiraCode-Regular-Symbol.zip
+
 (require 'fira-code-mode)
 
 (defun is-not-windows-so? ()
@@ -33,7 +36,8 @@
 					(lambda ()
 						(when (and (window-system) 
 											 (font-exists-p "Fira Code-12")
-											 (is-not-windows-so?))
+											 ;; (is-not-windows-so?)
+											 )
 							(progn
 								(setq fira-code-mode-disabled-ligatures '("[]" "x"))
 								(fira-code-mode)
@@ -96,13 +100,6 @@
 											 (interactive)
                        (revert-buffer nil t)))
 
-(defun fullscreen (&optional f)
-	(interactive)
-	(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-												 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-	(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-												 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
-
 (defun on-client-connect (&optional frame)
 	(select-frame frame)
 	(when (and frame (display-graphic-p))
@@ -118,4 +115,3 @@
 
 (when (display-graphic-p)
 	(load-font))
-
