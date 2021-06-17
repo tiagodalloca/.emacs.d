@@ -5,7 +5,14 @@
 ;; 		(enable-theme 'darktooth)))
 
 (use-package gruvbox-theme :ensure t
-  :config (load-theme 'gruvbox-light-soft t))
+	:config (load-theme
+					 (if (display-graphic-p)
+							 'gruvbox-light-soft 'gruvbox)
+					 t))
+
+;; (use-package gruvbox-theme :ensure t
+;;   :config (load-theme 'gruvbox t))
+
 
 ;; (use-package twilight-bright-theme :ensure t
 ;; 	:config (load-theme 'twilight-bright t))
