@@ -98,6 +98,7 @@
   :pin melpa-stable
   :ensure t
   :defer t
+	:after '(flycheck-clj-kondo)
   :config
   (progn (require 'clojure-mode-extra-font-locking)
 				 (define-clojure-indent
@@ -109,7 +110,12 @@
 					 (HEAD 2)
 					 (ANY 2)
 					 (context 2))
-				 (clj-refactor-mode 1)))
+				 (clj-refactor-mode 1)
+				 (require 'flycheck-clj-kondo)))
+
+(use-package flycheck-clj-kondo
+  :ensure t
+	:defer t)
 
 (global-unset-key (kbd "C-x j"))
 (use-package clj-refactor :ensure t :pin melpa-stable

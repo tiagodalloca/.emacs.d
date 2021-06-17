@@ -106,7 +106,7 @@ locate PACKAGE."
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
 	 (quote
-		(twilight-bright-theme twilight-bright-thme lenlen-theme ample-light ample-light-theme solarized-theme typescript-mode riscv-mode irony haskell-mode elpy coffee-mode robe inf-ruby monokai-theme darkokai-theme gruvbox-theme leuven-theme omnisharp smart-tabs-mode sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme)))
+		(flycheck-clj-kondo twilight-bright-theme twilight-bright-thme lenlen-theme ample-light ample-light-theme solarized-theme typescript-mode riscv-mode irony haskell-mode elpy coffee-mode robe inf-ruby monokai-theme darkokai-theme gruvbox-theme leuven-theme omnisharp smart-tabs-mode sass-mode matlab-mode darktooth-theme adjust-parens clj-refactor aggressive-indent markdown-mode counsel-projectile helm flatland-theme smex smartparens projectile powerline multiple-cursors js2-mode highlight-parentheses flycheck-irony diminish company-irony cider arduino-mode ample-theme)))
  '(safe-local-variable-values
 	 (quote
 		((eval font-lock-add-keywords nil
