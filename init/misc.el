@@ -31,7 +31,7 @@
    ( "C-x l"   . counsel-locate)
    ( "C-S-o"   . counsel-rhythmbox)
    :map ivy-minibuffer-map
-   ( "TAB"     . ivy-partial ))
+   ( "TAB"     . ivy-insert-current))
   :init
   (ivy-mode 1)
   :config
