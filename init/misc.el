@@ -78,17 +78,25 @@
 
 (use-package company :ensure
   :defer t
+  :diminish
   :init
   (progn
     (add-hook 'after-init-hook 'global-company-mode)
-    (setq company-dabbrev-downcase 0)
-    (setq company-idle-delay 0)
     (global-company-mode)
-    (diminish 'company-mode)
-		;; (global-unset-key (kbd "<tab>"))
 		(global-unset-key (kbd "TAB")))
+  :custom
+  (company-begin-commands '(self-insert-command))
+  (company-idle-delay 0)
+  (company-minimum-prefix-length 2)
+  (company-show-numbers t)
+  (company-tooltip-align-annotations 't)
   :bind
   (("TAB" . company-complete)))
+
+;; (use-package company-box :ensure
+;;   :after company
+;;   :diminish
+;;   :hook (company-mode . company-box-mode))
 
 (use-package yasnippet :ensure
 	:defer t

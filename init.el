@@ -9,23 +9,9 @@
 ;; You may delete these explanatory comments.
 
 (require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  (when no-ssl
-    (warn "\
-Your version of Emacs does not support SSL connections,
-which is unsafe because it allows man-in-the-middle attacks.
-There are two things you can do about this warning:
-1. Install an Emacs version that does support SSL and be safe.
-2. Remove this warning from your init file so you won't see it again."))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  ;; (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  (add-to-list 'package-archives (cons "gnu" "http://elpa.gnu.org/packages/")))
-  ;; (when (< emacs-major-version 24)
-  ;;   ;; For important compatibility libraries like cl-lib
-  ;;   (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives (cons "gnu" "http://elpa.gnu.org/packages/"))
 (package-initialize)
 
 ;; (setq gc-cons-threshold 100000000)
@@ -95,3 +81,17 @@ locate PACKAGE."
 (load-file (from-emacsd "init/misc.el"))
 (load-file (from-emacsd "init/themes.el"))
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company-box web-mode use-package tide solarized-theme smex smartparens sass-mode robe powerline php-mode markdown-mode leuven-theme highlight-parentheses haskell-mode gruvbox-theme flycheck-irony flycheck-clj-kondo emmet-mode elpy counsel-projectile company-irony coffee-mode clj-refactor aggressive-indent ag))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
