@@ -93,10 +93,10 @@
   :bind
   (("TAB" . company-complete)))
 
-;; (use-package company-box :ensure
-;;   :after company
-;;   :diminish
-;;   :hook (company-mode . company-box-mode))
+(use-package company-box :ensure
+  :after company
+  :diminish
+  :hook (company-mode . company-box-mode))
 
 (use-package yasnippet :ensure
 	:defer t
