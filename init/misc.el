@@ -90,17 +90,13 @@
   (company-minimum-prefix-length 2)
   (company-show-numbers t)
   (company-tooltip-align-annotations 't)
-  (completion-styles '(substring completion-substring-try-completion completion-substring-all-completions "Completion of the string taken as a substring.
-I.e. when completing \"foo_bar\" (where _ is the position of point),
-it will consider all completions candidates matching the glob
-pattern \"*foo*bar*\"."))
+  (completion-styles '(basic partial-completion substring emacs22 cider))
   :bind
   (("TAB" . company-complete)))
 
 (use-package company-box :ensure
   :after company
-  :diminish
-  :hook (company-mode . company-box-mode))
+  :diminish)
 
 (use-package yasnippet :ensure
 	:defer t

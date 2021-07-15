@@ -41,7 +41,7 @@
 											 ;; (is-not-windows-so?)
 											 )
 							(progn
-								(setq fira-code-mode-disabled-ligatures '("[]" "x"))
+								(setq fira-code-mode-disabled-ligatures '("[]" "x" ":=" ":-"))
 								(fira-code-mode)
 								(diminish 'fira-code-mode)))))
 
