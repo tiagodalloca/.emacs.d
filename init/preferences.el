@@ -1,4 +1,7 @@
-;; NO WELCOME SCREEN
+;;; package --- Summary
+;;; Commentary:
+;;; NO WELCOME SCREEN
+;;; CODE:
 (setq inhibit-startup-screen t)
 
 ;;TABS
@@ -11,19 +14,20 @@
 
 ;; FONTS
 (defun font-exists-p (font)
-	"check if font exists"
+	"Check if FONT exists."
 	(if (null (x-list-fonts font))
 			nil t))
 (defun set-font-if-exists (font)
-	"set font if it exists"
+	"Set FONT if it exists."
 	(if (font-exists-p font)
 			(set-face-attribute 'default (selected-frame) :font font)))
 
-(defun load-font () 
-	(set-face-attribute 'default nil :font "Monospace-12")
-	(set-font-if-exists "Consolas-13")
-	(set-font-if-exists "Ubuntu Mono-14")
-	(set-font-if-exists "Fira Code-12"))
+(defun load-font ()
+  "Function for loading my fonts."
+	(set-face-attribute 'default nil :font "Monospace-11")
+	(set-font-if-exists "Consolas-11")
+	(set-font-if-exists "Ubuntu Mono-12")
+	(set-font-if-exists "Fira Code-11"))
 
 ;; DON'T FORGET DO DOWNLOAD FIRA CODE FONT
 ;; AND https://github.com/tonsky/FiraCode/files/412440/FiraCode-Regular-Symbol.zip
@@ -36,7 +40,7 @@
 
 (add-hook 'prog-mode-hook
 					(lambda ()
-						(when (and (window-system) 
+						(when (and (window-system)
 											 (font-exists-p "Fira Code-12")
 											 ;; (is-not-windows-so?)
 											 )
@@ -66,6 +70,7 @@
 ;; MAXIMIZED SCREEN
 (require 'maxframe)
 (defun fullscreen (&optional f)
+  "Function for entering fullscreen.  Don't know what F is."
 	(interactive)
 	(x-send-client-message nil 0 nil "_NET_WM_STATE" 32
 												 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
@@ -103,6 +108,7 @@
                        (revert-buffer nil t)))
 
 (defun on-client-connect (&optional frame)
+  "Make FRAME fullscreen on initialization (I think)."
 	(select-frame frame)
 	(when (and frame (display-graphic-p))
 		(run-with-idle-timer
@@ -120,6 +126,8 @@
 
 (setq whitespace-style '(tabs trailing space-before-tab indentation empty space-after-tab tab-mark))
 
-
 ;; (set-face-foreground 'whitespace-tab "gray1")
 ;; (global-whitespace-mode)
+
+(provide 'preferences)
+;;; preferences.el ends here
