@@ -140,7 +140,9 @@
 				 (set 'sp-escape-quotes-after-insert nil)
 				 (sp-with-modes '(clojure-mode emacs-lisp-mode cider-repl-mode)
 					 (sp-local-pair "'" nil :actions nil)
-					 (sp-local-pair "`" "'" :when '(sp-in-string-p sp-in-comment-p))))
+					 (sp-local-pair "`" "'" :when '(sp-in-string-p sp-in-comment-p)))
+         (add-to-list 'emulation-mode-map-alists
+                      `((smartparens-mode . ,smartparens-mode-map))))
   :bind
   (:map smartparens-mode-map
         ("C-M-a" . sp-beginning-of-sexp)
@@ -201,10 +203,22 @@
   :diminish global-highlight-parentheses-mode)
 
 (use-package aggressive-indent :ensure
-	:defer t 
+	:defer t
   :init
   (aggressive-indent-global-mode)
   :diminish aggressive-indent-mode)
+
+(use-package lsp-mode :ensure
+  :defer
+  :config
+  (setq lsp-lens-enable t
+        lsp-signature-auto-activate nil
+        lsp-enable-indentation nil
+        lsp-completion-enable nil)
+  :hook
+  ((clojure-mode . lsp)
+   (clojurescript-mode . lsp)
+   (clojurerc-mode . lsp)))
 
 (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
 

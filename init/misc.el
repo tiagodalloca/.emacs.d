@@ -1,3 +1,11 @@
+;;; misc.el --- misc
+
+;;; Commentary:
+
+;; somewhat random stuff
+
+;;; Code:
+
 ;; Use smex to handle M-x
 (use-package smex :ensure)
 
@@ -115,6 +123,10 @@
   :defer t
   :diminish 'abbrev-mode)
 
+(use-package magit :ensure
+  :defer t
+  :diminish 'magit)
+
 (setq browse-url-generic-program (executable-find "firefox"))
 
 (defun open-koala ()
@@ -129,3 +141,6 @@
 
 (global-set-key (kbd "C-S-M-z C-S-M-z 1") 'open-koala)
 (global-set-key (kbd "C-S-M-z C-S-M-z 2") 'open-panda)
+
+(provide 'misc)
+;;; misc.el ends here

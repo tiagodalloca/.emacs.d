@@ -27,7 +27,7 @@
 	(set-face-attribute 'default nil :font "Monospace-11")
 	(set-font-if-exists "Consolas-11")
 	(set-font-if-exists "Ubuntu Mono-12")
-	(set-font-if-exists "Fira Code-11"))
+	(set-font-if-exists "Fira Code 10"))
 
 ;; DON'T FORGET DO DOWNLOAD FIRA CODE FONT
 ;; AND https://github.com/tonsky/FiraCode/files/412440/FiraCode-Regular-Symbol.zip
@@ -38,16 +38,16 @@
 	"Am I running on windows?"
 	(not (string-match-p "Windows" (getenv "PATH"))))
 
-(add-hook 'prog-mode-hook
-					(lambda ()
-						(when (and (window-system)
-											 (font-exists-p "Fira Code-12")
-											 ;; (is-not-windows-so?)
-											 )
-							(progn
-								(setq fira-code-mode-disabled-ligatures '("[]" "x" ":=" ":-"))
-								(fira-code-mode)
-								(diminish 'fira-code-mode)))))
+;; (add-hook 'prog-mode-hook
+;; 					(lambda ()
+;; 						(when (and (window-system)
+;; 											 (font-exists-p "Fira Code 10")
+;; 											 ;; (is-not-windows-so?)
+;; 											 )
+;; 							(progn
+;; 								(setq fira-code-mode-disabled-ligatures '("[]" "x" ":=" ":-"))
+;; 								(fira-code-mode)
+;; 								(diminish 'fira-code-mode)))))
 
 ;; do not confirm a new file or buffer
 (setq confirm-nonexistent-file-or-buffer nil)
