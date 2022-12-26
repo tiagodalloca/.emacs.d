@@ -27,6 +27,7 @@ cookies
 /ac-comphist.dat
 \#*
 /elpa
+/_elpa
 site-lisp/package/
 /swank
 /.mc-lists.el
@@ -53,3 +54,7 @@ site-lisp/package/
 /anaconda-mode/
 *.cache
 smex-items
+/transient
+/.lsp-session-*
+/bookmarks
+/projects
