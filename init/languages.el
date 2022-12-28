@@ -211,10 +211,11 @@
 (use-package lsp-mode :ensure
   :defer
   :config
-  (setq lsp-lens-enable t
-        lsp-signature-auto-activate nil
-        lsp-enable-indentation nil
-        lsp-completion-enable nil)
+  (progn (setq lsp-lens-enable t
+               lsp-signature-auto-activate nil
+               lsp-enable-indentation nil
+               lsp-completion-enable nil)
+         (define-key lsp-mode-map (kbd "C-ç") lsp-command-map))
   :hook
   ((clojure-mode . lsp)
    (clojurescript-mode . lsp)
