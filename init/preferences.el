@@ -56,9 +56,10 @@
 (prefer-coding-system 'utf-8)
 
 ;; LINE NUMBERS
-(global-linum-mode)
+;; (global-linum-mode)
+(global-display-line-numbers-mode 1)
 ;; (setq linum-format "%4d\u2502 ")
-(setq linum-format "%4d ")
+;; (setq linum-format "%4d ")
 
 ;; HIGHLIGHT CURRENT LINE
 (use-package hl-line
@@ -86,6 +87,25 @@
       `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
+
+;; NVM NODE PATH
+(defun nvm--latest-node-bin ()
+  "Return the bin path for the latest NVM Node version, or nil."
+  (require 'seq nil t)
+  (let* ((nvm-dir (expand-file-name "~/.nvm/versions/node"))
+         (versions (when (file-directory-p nvm-dir)
+                     (seq-filter
+                      (lambda (name) (string-prefix-p "v" name))
+                      (directory-files nvm-dir nil "^v")))))
+    (when versions
+      (let* ((sorted (sort versions (lambda (a b) (version< (substring a 1) (substring b 1)))))
+             (latest (car (last sorted))))
+        (expand-file-name "bin" (expand-file-name latest nvm-dir))))))
+
+(let ((node-bin (nvm--latest-node-bin)))
+  (when (and node-bin (file-directory-p node-bin))
+    (add-to-list 'exec-path node-bin)
+    (setenv "PATH" (concat node-bin path-separator (getenv "PATH")))))
 
 ;; NO TOOLBAR
 (tool-bar-mode -1)

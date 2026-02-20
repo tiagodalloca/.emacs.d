@@ -214,12 +214,46 @@
   (progn (setq lsp-lens-enable t
                lsp-signature-auto-activate nil
                lsp-enable-indentation nil
-               lsp-completion-enable nil)
+               lsp-completion-enable nil
+               lsp-clients-typescript-prefer-use-project-ts-server t)
          (define-key lsp-mode-map (kbd "C-ç") lsp-command-map))
   :hook
   ((clojure-mode . lsp)
    (clojurescript-mode . lsp)
-   (clojurerc-mode . lsp)))
+   (clojurerc-mode . lsp)
+   (typescript-ts-mode . lsp-deferred)
+   (tsx-ts-mode . lsp-deferred)))
+
+(defun lsp-typescript--filter-refactor-actions (actions)
+  "Remove TypeScript refactor actions that use applyRefactoring."
+  (if (fboundp 'lsp:code-action-command?)
+      (progn
+        (require 'seq nil t)
+        (seq-remove
+         (lambda (action)
+           (let* ((command (lsp:code-action-command? action))
+                  (cmd-name (and command (fboundp 'lsp:command-command)
+                                 (lsp:command-command command))))
+             (string= cmd-name "_typescript.applyRefactoring")))
+         actions))
+    actions))
+
+(defun lsp-typescript--code-actions-around (orig-fn &rest args)
+  "Around advice to filter TypeScript refactor code actions."
+  (let ((actions (apply orig-fn args)))
+    (lsp-typescript--filter-refactor-actions actions)))
+
+(defun lsp-typescript--block-refactor-command (orig-fn command &optional args)
+  "Block TypeScript applyRefactoring commands."
+  (let ((cmd (format "%s" command)))
+    (if (string= cmd "_typescript.applyRefactoring")
+        (message "lsp: skipped TypeScript refactor (applyRefactoring disabled)")
+      (funcall orig-fn command args))))
+
+(with-eval-after-load 'lsp-mode
+  (advice-add 'lsp-code-actions-at-point :around #'lsp-typescript--code-actions-around)
+  (advice-add 'lsp-workspace-command-execute :around #'lsp-typescript--block-refactor-command))
+
 
 (add-to-list 'auto-mode-alist '("\\.boot\\'" . clojure-mode))
 
@@ -243,12 +277,59 @@
 
 ;;TYPESCRIPT
 
-(use-package typescript-mode :ensure)
+(when (fboundp 'treesit-ready-p)
+  (add-to-list 'treesit-language-source-alist
+               '(typescript . ("https://github.com/tree-sitter/tree-sitter-typescript"
+                               "master"
+                               "typescript/src")))
+  (add-to-list 'treesit-language-source-alist
+               '(tsx . ("https://github.com/tree-sitter/tree-sitter-typescript"
+                        "master"
+                        "tsx/src"))))
 
-(use-package tide :ensure :defer t
-	:after (typescript-mode company flycheck)
-	:hook ((typescript-mode . tide-setup)
-				 (typescript-mode . tide-hl-identifier-mode)))
+(defun ensure-typescript-treesit-grammars ()
+  "Install TypeScript/TSX tree-sitter grammars if missing."
+  (when (fboundp 'treesit-ready-p)
+    (dolist (lang '(typescript tsx))
+      (unless (treesit-ready-p lang)
+        (condition-case err
+            (treesit-install-language-grammar lang)
+          (error (message "treesit: failed to install %s grammar: %s" lang err)))))))
+
+(add-hook 'after-init-hook #'ensure-typescript-treesit-grammars)
+
+(defun typescript-select-mode ()
+  "Select TypeScript mode, preferring tree-sitter when available."
+  (ensure-typescript-treesit-grammars)
+  (if (and (fboundp 'treesit-ready-p)
+           (treesit-ready-p 'typescript)
+           (fboundp 'typescript-ts-mode))
+      (typescript-ts-mode)
+    (typescript-mode)))
+
+(defun tsx-select-mode ()
+  "Select TSX mode, preferring tree-sitter when available."
+  (ensure-typescript-treesit-grammars)
+  (if (and (fboundp 'treesit-ready-p)
+           (treesit-ready-p 'tsx)
+           (fboundp 'tsx-ts-mode))
+      (tsx-ts-mode)
+    (typescript-mode)))
+
+(defun typescript-ts-setup ()
+  "Local setup for tree-sitter TypeScript buffers."
+  (setq indent-tabs-mode nil)
+  (setq typescript-ts-mode-indent-offset 2)
+  (smartparens-mode 1))
+
+(use-package typescript-mode :ensure t :defer t)
+
+(use-package typescript-ts-mode
+  :ensure nil
+  :mode (("\\.ts\\'" . typescript-select-mode)
+         ("\\.tsx\\'" . tsx-select-mode))
+  :hook ((typescript-ts-mode . typescript-ts-setup)
+         (tsx-ts-mode . typescript-ts-setup)))
 
 ;; ascii art:
 ;; http://patorjk.com/software/taag/
@@ -277,3 +358,5 @@
 (add-hook 'shen-mode-hook 'my-pretty-chars)
 (add-hook 'tex-mode-hook 'my-pretty-chars)
 (add-hook 'typescript-mode-hook 'my-pretty-chars)
+(add-hook 'typescript-ts-mode-hook 'my-pretty-chars)
+(add-hook 'tsx-ts-mode-hook 'my-pretty-chars)

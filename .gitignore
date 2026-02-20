@@ -58,3 +58,4 @@ smex-items
 /.lsp-session-*
 /bookmarks
 /projects
+/tree-sitter
